@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		{% stylesheets filter="cssrewrite"
+            'bundles/robiskapplication/js/vendors/bootstrap/css/font-awesome.css'
+		    'bundles/robiskapplication/css/main.css'
+            'bundles/robiskapplication/js/vendors/bootstrap/css/bootstrap.min.css'
+            'bundles/robiskapplication/js/vendors/bootstrap/css/bootstrap-datetimepicker.min.css'
+            'bundles/robiskapplication/js/vendors/bootstrap/css/bootstrap-theme.min.css'
+            'bundles/robiskapplication/js/vendors/bootstrap/css/sb-admin.css'
+        %}
+    	<link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen"/>
+    	{% endstylesheets %}
+
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+        {% javascripts
+            '../vendor/dm/ajaxcom/src/DM/AjaxCom/Resources/public/js/ajaxcom.js'
+            'bundles/robiskapplication/js/vendors/bootstrap/js/moment.js'
+            'bundles/robiskapplication/js/vendors/bootstrap/js/bootstrap.min.js'
+            'bundles/robiskapplication/js/vendors/bootstrap/js/bootstrap-datetimepicker.min.js'
+            filter='?yui_js,cssrewrite'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+	</head>
+
+	<body>
+        <div id="wrapper">
+            {% block robisk_application_header %}
+            {% endblock robisk_application_header %}
+
+            {% block robisk_application_content %}
+            {% endblock robisk_application_content %}
+        </div>
+        {% include 'RobiskApplicationBundle:Common:footer.html.twig' %}
+	</body>
+</html>

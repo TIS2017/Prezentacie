@@ -1,0 +1,15 @@
+route_admin_announcements:
+    path: /{id}
+    defaults: { _controller: RobiskApplicationBundle:Admin/AnnouncementAdmin:index, id: 0 }
+
+route_admin_announcement_add:
+    path: /add/{id}
+    defaults: { _controller: RobiskApplicationBundle:Admin/AnnouncementAdmin:add, id: 0 }
+
+route_admin_announcement_edit:
+    path: /edit/{id}/{announcementId}
+    defaults: { _controller: RobiskApplicationBundle:Admin/AnnouncementAdmin:edit, id: 0, announcementId: 0 }
+
+route_admin_announcement_delete:
+    path: /delete/{id}/{announcementId}
+    defaults: { _controller: RobiskApplicationBundle:Admin/AnnouncementAdmin:delete, id: 0, announcementId: 0 }

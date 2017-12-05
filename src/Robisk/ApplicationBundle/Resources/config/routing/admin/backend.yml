@@ -1,0 +1,3 @@
+route_admin:
+    pattern: /
+    defaults: { _controller: RobiskApplicationBundle:Admin/StaticAdmin:index }

@@ -1,0 +1,11 @@
+route_registration:
+    pattern: /registration
+    defaults: { _controller: RobiskApplicationBundle:User:registration }
+
+route_user_profile:
+    pattern: /profile
+    defaults: { _controller: RobiskApplicationBundle:User:profile }
+
+route_user_password_change:
+    pattern: /password-change
+    defaults: { _controller: RobiskApplicationBundle:User:changePassword }
