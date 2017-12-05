@@ -1,0 +1,179 @@
+{% extends "RobiskApplicationBundle::Common/layout.html.twig" %}
+
+{% block robisk_application_content %}
+	{% include 'RobiskApplicationBundle:Common:flash_messenger.html.twig' %}
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if is_granted('ROLE_ADMIN') %}
+
+                        <h1 class="page-header">{{ 'admin.subjects.settings.title'|trans }}</h1>
+
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="{{ path('route_admin_subjects')  }}">
+                                    <i class="fa fa-fw fa-book"></i>
+                                    {{ 'admin.side-navig.subjects'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('route_admin_subject_edit',
+                                    {'id': subject.id}) }}">
+                                        <i class="fa fa-fw fa-pencil"></i>
+                                        {{ subject.name }}
+                                </a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-fw fa-gears"></i>
+                                {{ 'admin.subjects.settings.title'|trans }}
+                            </li>
+                        </ol>
+
+                        {% if subject.status == 1 %}
+                            {% set status = 'admin.subjects.settings.status.active'|trans %}
+                        {% else %}
+                            {% set status = 'admin.subjects.settings.status.inactive'|trans %}
+                        {% endif %}
+                        <p>{{ 'admin.subjects.settings.status.title'|trans }}: {{ status }}</p>
+                        <a class="btn btn-warning" href="{{ path('route_admin_subject_change_status',
+                        {'id': subject.id}) }}">
+                            {{ 'admin.subjects.settings.status.change'|trans }}
+                        </a>
+                        <hr>
+
+                        <div class="col-md-6">
+                            <h3>{{ 'admin.subjects.settings.valuation.title'|trans }}</h3>
+
+                            <form class="form-horizontal" role="form" method="POST" action="{{ url }}">
+                                <div class="form-group">
+                                    <div>
+                                        {{ form_errors(form.A) }}
+                                    </div>
+                                    <div class="col-md-3 control-label">
+                                        {{ form_label(form.A, 'A') }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.A, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        {{ form_errors(form.B) }}
+                                    </div>
+                                    <div class="col-md-3 control-label">
+                                        {{ form_label(form.B, 'B') }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.B, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        {{ form_errors(form.C) }}
+                                    </div>
+                                    <div class="col-md-3 control-label">
+                                        {{ form_label(form.C, 'C') }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.C, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        {{ form_errors(form.D) }}
+                                    </div>
+                                    <div class="col-md-3 control-label">
+                                        {{ form_label(form.D, 'D') }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.D, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        {{ form_errors(form.E) }}
+                                    </div>
+                                    <div class="col-md-3 control-label">
+                                        {{ form_label(form.E, 'E') }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.E, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        {{ form_errors(form.Fx) }}
+                                    </div>
+                                    <div class="col-md-3 control-label">
+                                        {{ form_label(form.Fx, 'Fx') }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.Fx, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="col-md-6 col-md-offset-3 btn btn-success" type="submit">{{ 'admin.subjects.settings.submit'|trans }}</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h3>{{ 'admin.subjects.settings.valPoint.title'|trans }}</h3>
+                            <a class="btn btn-sm btn-success" href="{{ path('route_admin_subject_presentation_valuation_point_add',
+                                {'id': subject.id}) }}">
+                                    <i class="fa fa-fw fa-plus-circle"></i>
+                                    {{ 'admin.subjects.settings.valPoint.add'|trans }}
+                            </a>
+                            <hr>
+                            {% if subject.presentationValuationPoints|length > 0 %}
+                                <form class="form-horizontal" role="form" method="POST" action="{{ pvpUrl }}">
+                                    {% set count = 1 %}
+                                    {% for pvp in subject.presentationValuationPoints %}
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="pvp_point_{{ pvp.id }}">
+                                                {{ count }}.
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input class="form-control" type="text" name="pvp_point_{{ pvp.id }}" value="{{ pvp.point }}">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input class="form-control" type="text" name="pvp_height_{{ pvp.id }}" value="{{ pvp.height }}">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a class="btn btn-xs btn-danger" href="{{ path('route_admin_subject_presentation_valuation_point_delete',
+                                                {'id': subject.id, 'pvpId': pvp.id}) }}">
+                                                    <i class="fa fa-fw fa-remove"></i>
+                                                    {{ 'admin.subjects.settings.valPoint.delete'|trans }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {% set count = count +1 %}
+                                    {% endfor %}
+
+                                    <div class="form-group">
+                                        <button class="col-md-6 col-md-offset-3 btn btn-success" type="submit">{{ 'admin.subjects.settings.pvpForm.submit'|trans }}</button>
+                                    </div>
+                                </form>
+                            {% else %}
+                                <p class="empty warning">{{ 'admin.subjects.settings.valPoint.empty'|trans }}</p>
+                            {% endif %}
+                        </div>
+
+                    {% else %}
+                        <div class="title">{{ 'permission.warning.title'|trans }}</div>
+                        <p class="empty">{{ 'permission.denied.admin'|trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock robisk_application_content %}

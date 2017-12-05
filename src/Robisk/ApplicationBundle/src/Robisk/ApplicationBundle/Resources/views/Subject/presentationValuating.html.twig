@@ -1,0 +1,89 @@
+{% extends "RobiskApplicationBundle::Common/layout.html.twig" %}
+
+{% block robisk_application_content %}
+	{% include 'RobiskApplicationBundle:Common:flash_messenger.html.twig' %}
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if is_granted('ROLE_USER') %}
+
+                        <h1 class="page-header">{{ 'presentation.valuating.title'|trans }}</h1>
+
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="{{ path('route_subjects') }}">
+                                    <i class="fa fa-fw fa-book"></i>
+                                    {{ 'subjects.title'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('route_subject_view',
+                                {'id': subject.id}) }}">
+                                    <i class="fa fa-fw fa-th-large"></i>
+                                    {{ subject.name }}
+                                </a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-fw fa-calculator"></i>
+                                {{ 'presentation.valuating.title'|trans }}
+                            </li>
+                        </ol>
+
+                        <h3>
+                            {{ 'presentation.valuating.subtitle'|trans }}: {{ presentation.title }}
+                            ({{ student.getNameRev() }})
+                        </h3>
+
+                        {% if not usl.isUserPresentationValuated(student.id, subject.id) %}
+                            <form class="form-horizontal" role="form" method="POST" action="{{ url }}">
+                                {% for point in subject.presentationValuationPoints %}
+                                    <div class="form-group valuation">
+                                        <div class="col-md-2 control-label">
+                                            <label for="points_{{ point.id }}">{{ point.point }}</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input class="form-control" type="range" min="0" max="10" name="points_{{ point.id }}" value="5" onchange="updateTextInput(this.value, {{ point.id }});">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input class="form-control" type="number" id="counter_{{ point.id }}" size="2" value="5" min="0" max="10" />
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="form-group">
+                                    <button class="col-md-5 col-md-offset-2 btn btn-success" type="submit">{{ 'presentation.valuating.submit'|trans }}</button>
+                                </div>
+                            </form>
+                        {% else %}
+                            <p class="empty">{{ 'presentation.valuating.done'|trans }}</p>
+                        {% endif %}
+
+                    {% else %}
+                        <div class="title">{{ 'permission.warning.title'|trans }}</div>
+                        <p class="empty">{{ 'permission.denied.admin'|trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% if is_granted('ROLE_USER') %}
+
+
+
+
+
+
+{% else %}
+	<div class="title">{{ 'permission.warning.title'|trans }}</div>
+	<p class="empty">{{ 'permission.denied'|trans }}</p>
+{% endif %}
+
+<script type="text/javascript">
+    function updateTextInput(val, num) {
+      document.getElementById('counter_'+num).value=val; 
+    }
+</script>
+
+{% endblock robisk_application_content %}
