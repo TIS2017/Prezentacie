@@ -1,0 +1,15 @@
+routes_subject:
+    resource: "@RobiskApplicationBundle/Resources/config/routing/admin/subject.yml"
+    prefix: /subject
+
+routes_user:
+    resource: "@RobiskApplicationBundle/Resources/config/routing/admin/user.yml"
+    prefix: /user
+
+routes_backend:
+    resource: "@RobiskApplicationBundle/Resources/config/routing/admin/backend.yml"
+    prefix: /
+
+routes_announcement:
+    resource: "@RobiskApplicationBundle/Resources/config/routing/admin/announcement.yml"
+    prefix: /announcement

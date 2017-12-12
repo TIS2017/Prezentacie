@@ -1,0 +1,353 @@
+{% extends "RobiskApplicationBundle::Common/layout.html.twig" %}
+
+{% block robisk_application_content %}
+	{% include 'RobiskApplicationBundle:Common:flash_messenger.html.twig' %}
+
+    {% set uslStatus = 0 %}
+    {% for usl in user.subjects %}
+        {% if subject == usl.subject %}
+            {% set uslStatus = usl.status %}
+        {% endif %}
+    {% endfor %}
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if is_granted('ROLE_USER') %}
+
+                        {% if uslStatus == 2 %}
+                            <h1 class="page-header">{{ subject.name }}</h1>
+
+                            <ol class="breadcrumb">
+                                <li>
+                                    <a href="{{ path('route_subjects') }}">
+                                        <i class="fa fa-fw fa-book"></i>
+                                        {{ 'subjects.title'|trans }}
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <i class="fa fa-fw fa-th-large"></i>
+                                    {{ subject.name }}
+                                </li>
+                            </ol>
+
+                            <div class="col-md-6">
+                                <h3>{{ 'subject.view.announcements.title'|trans }}</h3>
+                                {% if subject.announcements|length > 0 %}
+                                    {% set count = getUnreadAnnouncements(user, subject)|length %}
+                                    <a href="{{ path('route_subject_announcements',
+                                    {'id': subject.id}) }}">
+                                        {{ 'subject.view.announcements.enter'|trans }}
+                                    </a>
+                                    {% if count > 0 %}
+                                        ({{ 'subject.view.accouncements.unread'|trans }}: {{ count }})
+                                    {% endif %}
+                                {% else %}
+                                    <p>{{ 'subject.view.announcements.empty'|trans }}</p>
+                                {% endif %}
+
+                                <h3>{{ 'subject.view.valuation'|trans }}</h3>
+                                <table class="table">
+                                    <tr>
+                                        <th>A</th>
+                                        <td><{{ subject.valuation.A }}, {{ subject.valuation.B }}></td>
+                                    </tr>
+                                    <tr>
+                                        <th>B</th>
+                                        <td>({{ subject.valuation.B }}, {{ subject.valuation.C }}></td>
+                                    </tr>
+                                    <tr>
+                                        <th>C</th>
+                                        <td>({{ subject.valuation.C }}, {{ subject.valuation.D }}></td>
+                                    </tr>
+                                    <tr>
+                                        <th>D</th>
+                                        <td>({{ subject.valuation.D }}, {{ subject.valuation.E }}></td>
+                                    </tr>
+                                    <tr>
+                                        <th>E</th>
+                                        <td>({{ subject.valuation.E }}, {{ subject.valuation.Fx }}></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fx</th>
+                                        <td>({{ subject.valuation.Fx }}, 0></td>
+                                    </tr>
+                                </table>
+
+                                <h3>{{ 'subject.view.mark.title'|trans }}</h3>
+                                <table class="table">
+                                    <tr>
+                                        <th>{{ 'subject.view.mark.point'|trans }}</th>
+                                        <th>{{ 'subject.view.mark.points'|trans }}</th>
+                                        <th>{{ 'subject.view.mark.max'|trans }}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'subject.view.mark.point.presentation'|trans }}</td>
+                                        <td>{{ usl.getPresentationPoints()|round(2) }}</td>
+                                        <td>{{ subject.getValPresentation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'subject.view.mark.point.attendance'|trans }}</td>
+                                        <td>{{ usl.getAttendancePoints()|round(2) }}</td>
+                                        <td>{{ subject.getValAttendance }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'subject.view.mark.point.summ'|trans }}</td>
+                                        <td>{{ usl.getPointsCount()|round(2) }}</td>
+                                        <td>{{ subject.getValSum }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'subject.view.mark.point.mark'|trans }}</th>
+                                        <th>{{ usl.getMark() }}</th>
+                                        <th></th>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="col-md-6">
+                                {% if unlockedAtt is not null and not user.getAttendanceDone(unlockedAtt) %}
+                                    <h3>{{ 'subject.view.attendance.today_title'|trans }}</h3>
+                                    <form class="form-horizontal" role="form" method="POST" action="{{ addAttendanceUrl }}">
+                                        <div class="form-group">
+                                            <div class="col-md-4 control-label">
+                                                <label for="attendance_password">{{ 'subject.view.attendance.password'|trans }}</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control" type="text" name="attendance_password" id="attendance_password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="col-md-6 col-md-offset-4 btn btn-success" type="submit">{{ 'subject.view.attendance.submit'|trans }}</button>
+                                        </div>
+                                    </form>
+                                {% endif %}
+
+                                <h3>{{ 'subject.presentation.title'|trans }}</h3>
+                                {% if user.getPresentation(subject.id) != null %}
+                                    {% set presentation = user.getPresentation(subject.id) %}
+                                    {% if app.user == presentation.owner and presentation.status == 0 %}
+                                        <a class="btn btn-danger" href="{{ path('route_subject_presentation_delete',
+                                        {'id': subject.id,
+                                            'presentationId': presentation.id}) }}">
+                                            <i class="fa fa-fw fa-remove"></i>
+                                            {{ 'subject.presentation.delete'|trans }}
+                                        </a><br/>
+                                    {% endif %}
+                                    <hr>
+                                    <p>{{ 'subject.presentation.download'|trans }}:
+                                        <a href="{{ path('route_subject_presentation_download',
+                                        {'id': subject.id,
+                                            'presentationId': presentation.id}) }}">
+                                            {{ presentation.getTitle() }}
+                                        </a>
+                                    <br>
+                                    {{ 'subject.presentation.students'|trans }}:
+                                    {% set tmp = 1 %}
+                                    {% for student in presentation.getUsers() %}
+                                        {% if tmp == 1 %}
+                                            {{ student.getNameRev() }}
+                                        {% else %}
+                                            , {{ student.getNameRev() }}
+                                        {% endif %}
+                                        {% if app.user == presentation.owner and presentation.status == 0 %}
+                                            {% if student != presentation.owner %}
+                                                <a class="btn btn-xs btn-danger" href="{{ path('route_subject_presentation_delete_user',
+                                                {'id': subject.id,
+                                                    'presentationId': presentation.id,
+                                                    'userId': student.id}) }}">
+                                                    <i class="fa fa-fw fa-remove"></i>
+                                                </a>
+                                            {% endif %}
+                                        {% else %}
+                                            {% if student == app.user and presentation.status == 0 %}
+                                                <a href="{{ path('route_subject_presentation_delete_user',
+                                                {'id': subject.id,
+                                                    'presentationId': presentation.id,
+                                                    'userId': student.id}) }}">
+                                                    {{ 'subject.presentation.user.delete'|trans }}
+                                                </a>
+                                            {% endif %}
+                                        {% endif %}
+                                        {% set tmp = tmp +1 %}
+                                    {% endfor %}
+                                    </p>
+                                    <hr>
+
+                                    {% if app.user == presentation.owner and presentation.status == 0 %}
+                                        <form class="form-horizontal" role="form" method="POST" action="{{ presentationAddUserUrl }}">
+                                            <div class="form-group">
+                                                <div class="col-md-4 control-label">
+                                                    <label for="presentation_user_add">{{ 'subject.presentation.user.add'|trans }}</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <select class="form-control" name="presentation_user_add" required>
+                                                        <option disabled selected>{{ 'subject.presentation.user.add.select'|trans }}</option>
+                                                        {% for user in subject.getApprovedUsers() %}
+                                                            {% if user not in presentation.getUsers() %}
+                                                                <option value="{{ user.id }}">{{ user.getNameRev() }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button class="col-md-6 col-md-offset-4 btn btn-success" type="submit">{{ 'subject.presentation.user.add.submit'|trans }}</button>
+                                            </div>
+                                        </form>
+                                    {% endif %}
+
+                                {% else %}
+                                    <h5>{{ 'subject.presentation.empty'|trans }}</h5>
+                                    <form class="form-horizontal" role="form" action="{{ uploadUrl }}" method="POST" {{ form_enctype(uploadForm) }}>
+                                        <div class="form-group">
+                                            <div>
+                                                {{ form_errors(uploadForm.title) }}
+                                            </div>
+                                            <div class="col-md-4 control-label">
+                                                {{ form_label(uploadForm.title, 'subject.presentation.upload.title'|trans) }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ form_widget(uploadForm.title, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div>
+                                                {{ form_errors(uploadForm.file) }}
+                                            </div>
+                                            <div class="col-md-4 control-label">
+                                                {{ form_label(uploadForm.title, 'subject.presentation.upload.file'|trans) }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ form_widget(uploadForm.file, {'attr': {'class': 'form-control'}}) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button class="col-md-6 col-md-offset-4 btn btn-success" type="submit">{{ 'subject.presentation.upload.submit'|trans }}</button>
+                                        </div>
+                                    </form>
+                                {% endif %}
+
+                                {% if subject.getPresentingPresentations()|length > 0 %}
+                                    <h3>{{ 'subject.presentation.valuating.presentations'|trans }}</h3>
+
+                                    <table class="table">
+                                        <tr>
+                                            <th>{{ 'subject.presentation.valuating.presentations.title'|trans }}</th>
+                                            <th>{{ 'subject.presentation.valuating.presentations.student'|trans }}</th>
+                                            <th>{{ 'subject.presentation.valuating.presentations.options'|trans }}</th>
+                                        </tr>
+                                        {% set tmp = 1 %}
+                                        {% for presentation in subject.getPresentingPresentations() %}
+                                            {% for student in presentation.getUsers() %}
+                                                {% if not usl.isUserPresentationValuated(student.id, subject.id) %}
+                                                    {% if user != student %}
+                                                        {% if tmp % 2 == 0 %}
+                                                            <tr>
+                                                        {% else %}
+                                                            <tr>
+                                                        {% endif %}
+                                                        <td>{{ presentation.title }}</td>
+                                                        <td>{{ student.getNameRev() }}</td>
+                                                        <td>
+                                                            <a class="btn btn-xs btn-info" href="{{ path('route_subject_presentation_valuating',
+                                                            {'id': subject.id, 'userId': student.id}) }}">
+                                                                <i class="fa fa-fw fa-calculator"></i>
+                                                                {{ 'subject.presentation.valuating.presentations.valuate'|trans }}
+                                                            </a>
+                                                        </td>
+                                                        </tr>
+                                                        {% set tmp = tmp +1 %}
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </table>
+
+                                {% endif %}
+                            </div>
+
+                            <h3 class="col-md-12">{{ 'subject.view.attendance.title'|trans }}</h3>
+                            <table class="table">
+                                <tr>
+                                    <th></th>
+                                    {% for num in 1..subject.weeks %}
+                                        {% if num < 10 %}
+                                            {% set cislo = '0' %}
+                                        {% else %}
+                                            {% set cislo = '' %}
+                                        {% endif %}
+                                        <th>{{ cislo }}{{ num }}. {{ 'subject.attendance.exercise'|trans }}</th>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <th>{{ 'subject.attendance.date'|trans }}</th>
+                                    {% for attendance in subject.attendances %}
+                                        <td class="small">{{ attendance.date|date('d.m.Y') }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <th>{{ 'subject.attendance.points'|trans }}</th>
+                                    {% for attendance in subject.attendances %}
+                                        <td>
+                                            {% if attendance in user.getMyAttendances() %}
+                                                <span>1</span>
+                                            {% else %}
+                                                <span>0</span>
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            </table>
+
+
+
+                        {% else %}
+                            <div class="title">{{ 'permission.warning.title'|trans }}</div>
+                            <p class="empty">{{ 'permission.denied.subject.1'|trans }} {{ subject.name }} {{ 'permission.denied.subject.2'|trans }}</p>
+                        {% endif %}
+
+                    {% else %}
+                        <div class="title">{{ 'permission.warning.title'|trans }}</div>
+                        <p class="empty">{{ 'permission.denied.admin'|trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% if is_granted('ROLE_USER') %}
+
+
+
+
+
+
+		
+		<div>
+		<br/>
+
+			<div class="half-2">
+
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+	
+{% else %}
+	<div class="title">{{ 'permission.warning.title'|trans }}</div>
+	<p class="empty">{{ 'permission.denied'|trans }}</p>
+{% endif %}
+
+{% endblock robisk_application_content %}
