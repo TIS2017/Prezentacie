@@ -14,6 +14,7 @@ class UserController extends BaseController
 {
     public function registrationAction()
     {
+        $gifsdjgipdfjgoijhsdi;
         $request = $this->get('request');
         $userManager = $this->get('manager_user');
         $form = $this->createForm(new RegistrationType(), new Registration(), array('csrf_protection' => false));
@@ -30,7 +31,7 @@ class UserController extends BaseController
                 $encoderFactory = $this->get('security.encoder_factory');
                 $encoder = $encoderFactory->getEncoder($user);
                 $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-                
+
                 $user->setPassword($password);
                 $userManager->update($user);
                 $url = $this->generateUrl('route_home');
@@ -42,7 +43,7 @@ class UserController extends BaseController
         $url = $this->generateUrl('route_registration');
 
         return $this->render(
-            'RobiskApplicationBundle:User:registration.html.twig', 
+            'RobiskApplicationBundle:User:registration.html.twig',
             array(
                 'form'     => $form->createView(),
                 'url'      => $url,
@@ -114,7 +115,7 @@ class UserController extends BaseController
         $passwordUrl = $this->generateUrl('route_user_password_change');
 
         return $this->render(
-            'RobiskApplicationBundle:User:profile.html.twig', 
+            'RobiskApplicationBundle:User:profile.html.twig',
             array(
                 'user'          => $user,
                 'profile_form'  => $profileForm->createView(),
@@ -139,7 +140,7 @@ class UserController extends BaseController
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                
+
                 $changePassword = $form->getData();
                 $user_tmp = $changePassword->getUser();
 
@@ -147,13 +148,13 @@ class UserController extends BaseController
                 $encoderFactory = $this->get('security.encoder_factory');
                 $encoder = $encoderFactory->getEncoder($user);
                 $password = $encoder->encodePassword($user_tmp->getPassword(), $user->getSalt());
-                    
+
                 $user->setPassword($password);
-                $userManager->update($user); 
+                $userManager->update($user);
             }
         }
 
-        $url = $this->generateUrl('route_user_profile');    
+        $url = $this->generateUrl('route_user_profile');
 
         $response = new RedirectResponse($url);
         return $response;
