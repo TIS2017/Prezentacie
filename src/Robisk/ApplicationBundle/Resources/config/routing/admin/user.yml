@@ -1,7 +1,0 @@
-route_admin_users:
-    path: /
-    defaults: { _controller: RobiskApplicationBundle:Admin/UserAdmin:index }
-
-route_admin_reset_password:
-    path: /reset-password/{userId}
-    defaults: { _controller: RobiskApplicationBundle:Admin/UserAdmin:resetPassword, userId: 0 }
