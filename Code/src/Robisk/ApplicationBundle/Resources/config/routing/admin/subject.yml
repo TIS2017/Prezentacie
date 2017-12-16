@@ -69,3 +69,11 @@ route_admin_subject_presentation_valuation_point_save:
 route_admin_subject_presentation_valuation_point_delete:
     path: /presentation-valuation-point/delete/{id}/{pvpId}
     defaults: { _controller: RobiskApplicationBundle:Admin/SubjectAdmin:deletePresentationValuationPoint, id: 0, pvpId: 0 }
+
+route_teacher_presentations:
+    path: edit/{id}/teacher-presentations
+    defaults: { _controller: RobiskApplicationBundle:Admin/SubjectAdmin:teacherPresentations, id: 0}
+
+route_send_mail:
+    path: edit/{id}/send-mail
+    defaults: { _controller: RobiskApplicationBundle:Admin/SubjectAdmin:sendMail, id: 0}

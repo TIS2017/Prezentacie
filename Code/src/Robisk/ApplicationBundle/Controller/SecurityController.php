@@ -35,4 +35,14 @@ class SecurityController extends BaseController
             )
         );
     }
+
+    public function forgottenAction(Request $request){
+        $session= $request->getSession();
+        if(!isset($error)){
+            $error='';
+        }
+        $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
+
+        return $this->render('RobiskApplicationBundle:Security:forgotten.html.twig', array('last_username'=> $lastUsername, 'error'=>$error));
+    }
 }

@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">{{ 'user.login.title'|trans }}</h1>
+                    <h1 class="page-header">{{ 'user.login.titleReset'|trans }}</h1>
 
                     <form class="form-horizontal" role="form" action="{{ path('login_check') }}" method="post">
                         {% if error %}
@@ -17,26 +17,29 @@
                                 </div>
                             </div>
                         {% endif %}
-                        <div class="form-group">
-                            <label class="col-md-1 control-label">
-                                <i class="glyphicon glyphicon-user"></i>
-                            </label>
-                            <div class="col-md-2">
-                                <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'user.login.username'|trans }}" />
-                            </div>
-                        </div>
+
 
                         <div class="form-group">
                             <label class="col-md-1 control-label">
                                 <i class="glyphicon glyphicon-lock"></i>
                             </label>
                             <div class="col-md-2">
-                                <input class="form-control" type="password" id="password" name="_password" placeholder="{{ 'user.login.password'|trans }}" />
+                                <input class="form-control" type="password" id="password" name="_password1" placeholder="{{ 'user.login.password'|trans }}" />
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <button class="col-md-3 btn btn-success" type="submit">{{ 'user.login.submit'|trans }}</button>
+                            <label class="col-md-1 control-label">
+                                <!--<i class="glyphicon glyphicon-lock"></i>-->
+                            </label>
+                            <div class="col-md-2">
+                                <input class="form-control" type="password" id="password" name="_password2" placeholder="{{ 'user.login.passwordAgain'|trans }}" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <button class="col-md-3 btn btn-success" type="submit">{{ 'user.login.doReset'|trans }}</button>
                         </div>
                     </form>
                 </div>
