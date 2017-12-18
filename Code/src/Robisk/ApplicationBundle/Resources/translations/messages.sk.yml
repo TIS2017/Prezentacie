@@ -7,7 +7,7 @@ header.admin.users: Študenti
 header.registration: Registrácia
 header.profile: Profil
 
-frontend.announcements.title: Oznamy
+frontend.announcements.title: Bonusové úlohy
 frontend.professor: "Vyučujúci: doc. PhDr. Ján Rybár, PhD."
 
 permission.denied: Na prezeranie tohto obsahu stránky nemáte oprávnenia. Prihláste sa.
@@ -16,9 +16,9 @@ permission.denied.subject.1: Na prezeranie obsahu predmetu
 permission.denied.subject.2: nemáte oprávnenia.
 permission.warning.title: Pozor!
 
-announcement.frontend.empty: Momentálne nie sú žiadne oznamy
+announcement.frontend.empty: Momentálne nie sú žiadne bonusové úlohy
 
-navig.home: Oznamy
+navig.home: Bonusové úlohy
 navig.subjects: Predmety
 
 user.register.email: Email
@@ -104,7 +104,7 @@ subject.status.approved: Potvrdený
 subject.status.declined: Zamietnutý
 subject.enter: Vstúp
 subject.view.announcements.title: Bonusové úlohy
-subject.view.announcements.empty: Momentálne nie sú žiadne oznamy
+subject.view.announcements.empty: Momentálne nie sú žiadne bonusové úlohy
 subject.view.announcements.enter: Bonusové úlohy
 subject.view.accouncements.unread: neprečítaných
 subject.view.attendance.title: Dochádzka
@@ -139,7 +139,7 @@ subject.presentation.valuating.presentations.title: Prezentácia
 subject.presentation.valuating.presentations.student: Študent
 subject.presentation.valuating.presentations.options: Možnosti
 subject.presentation.valuating.presentations.valuate: Hodnoť
-subject.teacherPresentation: Prezentácie 
+subject.teacherPresentation: Prezentácie
 subject.sendMail: Poslať mail
 
 admin.title: Administrátorská sekcia
@@ -208,7 +208,7 @@ table.season: Semester
 table.status: Status
 table.user: Študent
 
-announcements.title: Oznamy
+announcements.title: Bonusové úlohy
 
 presentation.valuating.title: Hodnotenie
 presentation.valuating.subtitle: Prezentácia
