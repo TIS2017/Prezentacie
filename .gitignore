@@ -1,0 +1,42 @@
+# Cache and logs (Symfony2)
+/Code/app/cache/*
+/Code/app/logs/*
+/Code/app//config/prezentacie.sssql
+!Code/app/cache/.gitkeep
+!Code/app/logs/.gitkeep
+
+# Cache and logs (Symfony3)
+/Code/var/cache/*
+/Code/var/logs/*
+!Code/var/cache/.gitkeep
+!Code/var/logs/.gitkeep
+
+# Parameters
+/Code/app/config/parameters.yml
+/Code/app/config/parameters.ini
+
+# Managed by Composer
+/Code/app/bootstrap.php.cache
+/Code/var/bootstrap.php.cache
+/Code/bin/*
+!Code/bin/console
+!Code/bin/symfony_requirements
+/Code/vendor/
+
+# Assets and user uploads
+/Code/web/bundles/
+/Code/web/uploads/
+/Code/web/css/
+/Code/web/js/
+
+# PHPUnit
+/Code/app/phpunit.xml
+/Code/phpunit.xml
+
+# Build data
+/Code/build/
+
+# Composer PHAR
+/Code/composer.phar
+
+/Code/.idea/
