@@ -1,1 +1,47 @@
-TEST
+{% extends "RobiskApplicationBundle::Common/layout.html.twig" %}
+
+{% block robisk_application_content %}
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if is_granted('ROLE_ADMIN') %}
+
+                        <h1 class="page-header">{{ 'subject.teacherPresentation'|trans }}</h1>
+
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="{{ path('route_admin_subjects')  }}">
+                                    <i class="fa fa-fw fa-book"></i>
+                                    {{ 'admin.side-navig.subjects'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('route_admin_subject_edit',
+                                    {'id': subject.id}) }}">
+                                    <i class="fa fa-fw fa-pencil"></i>
+                                    {{ subject.name }}
+                                </a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-fw fa-envelope"></i>
+                                {{ 'subject.teacherPresentation'|trans }}
+                            </li>
+                        </ol>
+
+                        <form class="form-horizontal" role="form">
+
+
+                        </form>
+
+                    {% else %}
+                        <div class="title">{{ 'permission.warning.title'|trans }}</div>
+                        <p class="empty">{{ 'permission.denied.admin'|trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock robisk_application_content %}
