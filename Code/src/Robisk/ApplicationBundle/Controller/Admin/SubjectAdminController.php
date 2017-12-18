@@ -16,7 +16,7 @@ use Robisk\ApplicationBundle\Entity\Subject;
 
 class SubjectAdminController extends BaseController {
 
-	public function indexAction() 
+	public function indexAction()
 	{
 		$user = $this->getUser();
 		$subjectManager = $this->get('manager_subject');
@@ -49,7 +49,7 @@ class SubjectAdminController extends BaseController {
 				$subjectManager->update($subject);
                 $svManager->update($subjectValuation);
 				$url = $this->generateUrl('route_admin_subject_edit', array('id' => $subject->getId()));
-				
+
 				$response = new RedirectResponse($url);
 				return $response;
 			}
@@ -111,7 +111,7 @@ class SubjectAdminController extends BaseController {
 		$uslManager->update($usl);
 
 		$url = $this->generateUrl('route_admin_subject_edit', array('id' => $id));
-		
+
 		return $this->redirect($url);
 	}
 
@@ -132,7 +132,7 @@ class SubjectAdminController extends BaseController {
 		}
 
 		$url = $this->generateUrl('route_admin_subject_edit', array('id' => $id));
-		
+
 		return $this->redirect($url);
 	}
 
@@ -265,7 +265,7 @@ class SubjectAdminController extends BaseController {
 		$student = $userManager->findOneBy(array('id' => $userId));
 		$usl = $uslManager->findOneBy(array(
 				'user'    => $student,
-				'subject' => $subject 
+				'subject' => $subject
 			));
 
 		return $this->render(
@@ -447,7 +447,7 @@ class SubjectAdminController extends BaseController {
     	$pvpManager = $this->get('manager_presentation_valuation_point');
     	$pvp = $pvpManager->findOneBy(array('id' => $pvpId));
 
-    	$pvpManager->delete($pvp);    	
+    	$pvpManager->delete($pvp);
 
     	$url = $this->generateUrl('route_admin_subject_settings', array('id' => $id));
 
@@ -456,7 +456,9 @@ class SubjectAdminController extends BaseController {
     }
 
     public function teacherPresentationsAction($id){
-	    return $this->render('RobiskApplicationBundle:Subject/Admin:teacherPresentations.html.twig');
+			$subjectManager = $this->get('manager_subject');
+			$subject = $subjectManager->findOneBy(array('id' => $id));
+	    return $this->render('RobiskApplicationBundle:Subject/Admin:teacherPresentations.html.twig', array('subject' => $subject ));
     }
 
     public function sendMailAction($id){
