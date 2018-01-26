@@ -68,7 +68,7 @@ class Announcement
     protected $updatesCount;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="AnnouncementsComments", mappedBy="announcement", cascade={"persist", "remove"})
      */
@@ -78,7 +78,7 @@ class Announcement
     /**
      * @var string
      *
-     * @ORM\Column(name="video_URL", type="string", length=255)
+     * @ORM\Column(name="video_URL", type="string", length=255, nullable=true, options={"default": NULL})
      * @Assert\NotBlank()
      */
     protected $videoURL;
@@ -248,5 +248,38 @@ class Announcement
     public function getSubject()
     {
         return $this->subject;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getVideoURL()
+    {
+        return $this->videoURL;
+    }
+
+    /**
+     * @param string $videoURL
+     */
+    public function setVideoURL($videoURL)
+    {
+        $this->videoURL = $videoURL;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnnouncementsComments()
+    {
+        return $this->announcementsComments;
+    }
+
+    /**
+     * @param mixed $announcementsComments
+     */
+    public function setAnnouncementsComments($announcementsComments)
+    {
+        $this->announcementsComments = $announcementsComments;
     }
 }

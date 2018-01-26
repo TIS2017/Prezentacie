@@ -141,7 +141,7 @@ class Subject
     /**
      * @var integer
      *
-     * @ORM\Column(name="val_comment", type="integer", options={"default"=70})
+     * @ORM\Column(name="val_comment", type="integer")
      */
     protected $valComment;
 
@@ -689,4 +689,37 @@ class Subject
     {
         return $this->valPresentation + $this->valAttendance;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTeacherPresentation()
+    {
+        return $this->teacherPresentation;
+    }
+
+    /**
+     * @param ArrayCollection $teacherPresentation
+     */
+    public function setTeacherPresentation($teacherPresentation)
+    {
+        $this->teacherPresentation = $teacherPresentation;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValComment()
+    {
+        return $this->valComment;
+    }
+
+    /**
+     * @param int $valComment
+     */
+    public function setValComment($valComment)
+    {
+        $this->valComment = $valComment;
+    }
+
 }

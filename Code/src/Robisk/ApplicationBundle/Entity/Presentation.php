@@ -352,4 +352,20 @@ class Presentation
         return $this->owner;
     }
 
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getUserPresentationComments()
+    {
+        return $this->userPresentationComments;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $userPresentationComments
+     */
+    public function setUserPresentationComments($userPresentationComments)
+    {
+        $this->userPresentationComments = $userPresentationComments;
+    }
+
 }
