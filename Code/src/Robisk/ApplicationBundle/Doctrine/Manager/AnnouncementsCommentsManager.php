@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Adam
- * Date: 26.01.2018
- * Time: 13:30
- */
 
 namespace Robisk\ApplicationBundle\Doctrine\Manager;
 
