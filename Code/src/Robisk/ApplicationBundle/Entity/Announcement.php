@@ -67,6 +67,23 @@ class Announcement
      */
     protected $updatesCount;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AnnouncementsComments", mappedBy="announcement", cascade={"persist", "remove"})
+     */
+
+    protected $announcementsComments;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="video_URL", type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    protected $videoURL;
+
+
     public function __construct()
     {
         $time = new \DateTime('now');

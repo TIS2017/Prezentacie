@@ -117,6 +117,38 @@ class User implements UserInterface
      */
     protected $presentationsCreated;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AnnouncementsComments", mappedBy="user", cascade={"persist", "remove"})
+     */
+
+    protected $announcementsComments;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="UserPresentationComments", mappedBy="user", cascade={"persist", "remove"})
+     */
+
+    protected $userPresentationComments;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TeacherPresentationComments", mappedBy="user", cascade={"persist", "remove"})
+     */
+
+    protected $teacherPresentationComments;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TeacherPresentation", mappedBy="user", cascade={"persist", "remove"})
+     */
+
+    protected $teacherPresentation;
+
     public function __construct()
     {
         $this->role = self::ROLE_USER;

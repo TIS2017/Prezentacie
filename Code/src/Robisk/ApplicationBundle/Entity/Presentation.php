@@ -70,6 +70,14 @@ class Presentation
      */
     protected $owner;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="UserPresentationComments", mappedBy="presentation")
+     */
+
+    protected $userPresentationComments;
+
     public function __construct()
     {
         $this->userSubjectLookup = new \Doctrine\Common\Collections\ArrayCollection();
