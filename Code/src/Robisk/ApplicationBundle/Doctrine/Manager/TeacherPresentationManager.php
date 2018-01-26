@@ -1,13 +1,19 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Adam
+ * Date: 26.01.2018
+ * Time: 13:31
+ */
 
 namespace Robisk\ApplicationBundle\Doctrine\Manager;
 
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class UserSubjectPresentationLookupManager extends CommonManager 
+class TeacherPresentationManager extends CommonManager
 {
-	/**
+    /**
      * Constructor.
      *
      * @param EntityManager           $om
