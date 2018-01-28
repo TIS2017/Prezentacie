@@ -117,6 +117,14 @@ class Subject
     protected $presentationValuationPoints;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TeacherPresentation", mappedBy="subject")
+     */
+
+    protected $teacherPresentation;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="val_attendance", type="integer", options={"default"=30})
@@ -129,6 +137,13 @@ class Subject
      * @ORM\Column(name="val_presentation", type="integer", options={"default"=70})
      */
     protected $valPresentation;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="val_comment", type="integer")
+     */
+    protected $valComment;
 
     public function __construct()
     {
@@ -674,4 +689,37 @@ class Subject
     {
         return $this->valPresentation + $this->valAttendance;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTeacherPresentation()
+    {
+        return $this->teacherPresentation;
+    }
+
+    /**
+     * @param ArrayCollection $teacherPresentation
+     */
+    public function setTeacherPresentation($teacherPresentation)
+    {
+        $this->teacherPresentation = $teacherPresentation;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValComment()
+    {
+        return $this->valComment;
+    }
+
+    /**
+     * @param int $valComment
+     */
+    public function setValComment($valComment)
+    {
+        $this->valComment = $valComment;
+    }
+
 }

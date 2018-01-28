@@ -250,4 +250,5 @@ class SubjectValuation
     {
         return $this->Fx;
     }
+
 }

@@ -70,6 +70,14 @@ class Presentation
      */
     protected $owner;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="UserPresentationComments", mappedBy="presentation")
+     */
+
+    protected $userPresentationComments;
+
     public function __construct()
     {
         $this->userSubjectLookup = new \Doctrine\Common\Collections\ArrayCollection();
@@ -342,6 +350,22 @@ class Presentation
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getUserPresentationComments()
+    {
+        return $this->userPresentationComments;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $userPresentationComments
+     */
+    public function setUserPresentationComments($userPresentationComments)
+    {
+        $this->userPresentationComments = $userPresentationComments;
     }
 
 }
