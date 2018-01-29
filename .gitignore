@@ -21,11 +21,8 @@
 !Code/bin/symfony_requirements
 /Code/vendor/
 
-# Assets and user uploads
-/Code/web/bundles/
+# User uploads
 /Code/web/uploads/
-/Code/web/css/
-/Code/web/js/
 
 # PHPUnit
 /Code/app/phpunit.xml
