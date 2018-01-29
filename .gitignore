@@ -1,7 +1,7 @@
 # Cache and logs (Symfony2)
 /Code/app/cache/*
 /Code/app/logs/*
-/Code/app//config/prezentacie.sssql
+/Code/app/config/prezentacie.sssql
 !Code/app/cache/.gitkeep
 !Code/app/logs/.gitkeep
 
@@ -21,11 +21,8 @@
 !Code/bin/symfony_requirements
 /Code/vendor/
 
-# Assets and user uploads
-/Code/web/bundles/
+# User uploads
 /Code/web/uploads/
-/Code/web/css/
-/Code/web/js/
 
 # PHPUnit
 /Code/app/phpunit.xml
