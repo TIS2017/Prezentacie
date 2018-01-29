@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * AnnouncementsComments
+ * AnnouncementComments
  *
- * @ORM\Table(name="annoucements_comments")
+ * @ORM\Table(name="announcement_comments")
  * @ORM\Entity
  */
-class AnnouncementsComments
+class AnnouncementComments
 {
     /**
      * @var integer
@@ -25,7 +25,7 @@ class AnnouncementsComments
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="announcementsComments")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="announcementComments")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
@@ -33,8 +33,8 @@ class AnnouncementsComments
     /**
      * @var Announcement
      *
-     * @ORM\ManyToOne(targetEntity="Announcement", inversedBy="announcementsComments")
-     * @ORM\JoinColumn(name="annoucement_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Announcement", inversedBy="announcementComments")
+     * @ORM\JoinColumn(name="announcement_id", referencedColumnName="id")
      */
     protected $announcement;
 
@@ -48,7 +48,7 @@ class AnnouncementsComments
     /**
      * @var integer
      *
-     * @ORM\OneToOne(targetEntity="AnnouncementsComments")
+     * @ORM\OneToOne(targetEntity="AnnouncementComments")
      * @ORM\JoinColumn(name="response_to_id", referencedColumnName="id")
      */
 
