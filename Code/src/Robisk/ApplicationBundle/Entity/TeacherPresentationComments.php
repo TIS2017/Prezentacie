@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Announcement
  *
- * @ORM\Table(name="teacher_presentation_comments")
+ * @ORM\Table(name="techer_presentation_comments")
  * @ORM\Entity
  */
 class TeacherPresentationComments

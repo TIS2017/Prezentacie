@@ -1,7 +1,7 @@
 # Cache and logs (Symfony2)
 /Code/app/cache/*
 /Code/app/logs/*
-/Code/app/config/prezentacie.sssql
+/Code/app//config/prezentacie.sssql
 !Code/app/cache/.gitkeep
 !Code/app/logs/.gitkeep
 
