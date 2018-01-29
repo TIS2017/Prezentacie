@@ -70,10 +70,10 @@ class Announcement
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AnnouncementsComments", mappedBy="announcement", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="AnnouncementComments", mappedBy="announcement", cascade={"persist", "remove"})
      */
 
-    protected $announcementsComments;
+    protected $announcementComments;
 
     /**
      * @var string
@@ -270,16 +270,16 @@ class Announcement
     /**
      * @return mixed
      */
-    public function getAnnouncementsComments()
+    public function getAnnouncementComments()
     {
-        return $this->announcementsComments;
+        return $this->announcementComments;
     }
 
     /**
-     * @param mixed $announcementsComments
+     * @param mixed $announcementComments
      */
-    public function setAnnouncementsComments($announcementsComments)
+    public function setAnnouncementComments($announcementComments)
     {
-        $this->announcementsComments = $announcementsComments;
+        $this->announcementComments = $announcementComments;
     }
 }

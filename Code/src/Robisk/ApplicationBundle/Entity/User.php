@@ -120,10 +120,10 @@ class User implements UserInterface
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AnnouncementsComments", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="AnnouncementComments", mappedBy="user", cascade={"persist", "remove"})
      */
 
-    protected $announcementsComments;
+    protected $announcementComments;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -406,17 +406,17 @@ class User implements UserInterface
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function getAnnouncementsComments()
+    public function getAnnouncementComments()
     {
-        return $this->announcementsComments;
+        return $this->announcementComments;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $announcementsComments
+     * @param \Doctrine\Common\Collections\ArrayCollection $announcementComments
      */
-    public function setAnnouncementsComments($announcementsComments)
+    public function setAnnouncementComments($announcementComments)
     {
-        $this->announcementsComments = $announcementsComments;
+        $this->announcementComments = $announcementComments;
     }
 
     /**
