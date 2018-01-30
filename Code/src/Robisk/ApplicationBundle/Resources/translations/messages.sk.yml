@@ -141,6 +141,11 @@ subject.presentation.valuating.presentations.options: Možnosti
 subject.presentation.valuating.presentations.valuate: Hodnoť
 subject.teacherPresentation: Prezentácie
 subject.sendMail: Poslať mail
+subject.send: Odošli
+subject.subject: Predmet
+subject.content: Obsah
+subject.emptyMail: Email nie je možné napísať, lebo neexistuje schválený študent, ktorý je zapísaný na predmet
+subject.allReceivers: Označiť všetkých
 
 admin.title: Administrátorská sekcia
 admin.subjects.title: Predmety

@@ -30,8 +30,61 @@
                             </li>
                         </ol>
 
-                        <form class="form-horizontal" role="form">
+                        <!-- pridany form na posielanie emailu ---------------------------------------------------->
+                        <form class="form-horizontal" role="form" method="POST">
+                          {% if subject.getApprovedUsers()|length > 0 %}
 
+                              <div class="form-group">
+                                {% for user in subject.getApprovedUsers() %}
+                                <label>
+                                  <input type="checkbox" value="{{ user.email }}">
+                                  {{ user.firstName ~ ' ' ~ user.lastName}}
+                              </label>
+                              &emsp;
+
+                                {% endfor %}
+                                <br><br>
+                                <label>
+                                    <input type="checkbox" value="{{ 999 }}">
+                                    {{ 'subject.allReceivers'|trans}}
+                                </label>
+                              </div><br>
+
+                              <div class="form-group">
+                                  <div>
+                                      {{ form_errors(form.subject) }}
+                                  </div>
+                                  <div class="col-md-1 control-label">
+                                      {{ form_label(form.subject, 'subject.subject'|trans) }}
+                                  </div>
+                                  <div class="col-md-7">
+                                      {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <div>
+                                      {{ form_errors(form.content) }}
+                                  </div>
+                                  <div class="col-md-1 control-label">
+                                      {{ form_label(form.content, 'subject.content'|trans) }}
+                                  </div>
+                                  <div class="col-md-7">
+                                      {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': '8'}}) }}
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="col-md-6"></div>
+                                <a class="btn btn-success col-md-2" href="{{ path('route_send_mail',
+                                {'id': subject.id}) }}">
+                                    <i class="fa fa-send"></i>
+                                    {{ 'subject.send'|trans }}
+                                </a>
+                             </div>
+                          {% else %}
+                            <p class="empty">{{ 'subject.emptyMail'|trans }}</p>
+                          {% endif %}
 
                         </form>
 

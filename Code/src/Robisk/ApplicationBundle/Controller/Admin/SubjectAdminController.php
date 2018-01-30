@@ -13,6 +13,7 @@ use Robisk\ApplicationBundle\Form\Type\PresentationValuationPointType;
 use Robisk\ApplicationBundle\Entity\UserSubjectLookup;
 use Robisk\ApplicationBundle\Entity\Attendance;
 use Robisk\ApplicationBundle\Entity\Subject;
+use Robisk\ApplicationBundle\Form\Type\SendMailType;
 
 class SubjectAdminController extends BaseController {
 
@@ -462,8 +463,31 @@ class SubjectAdminController extends BaseController {
     }
 
     public function sendMailAction($id){
-	    $subjectManager= $this->get('manager_subject');
+				$request = $this->get('request');
+	    	$subjectManager= $this->get('manager_subject');
         $subject = $subjectManager->findOneBy(array('id' => $id));
-	    return $this->render('RobiskApplicationBundle:Subject/Admin:sendMail.html.twig', array('subject' => $subject));
+
+			  $form = $this->createForm(new SendMailType(), array('csrf_protection' => false));
+				$loger=$this->get('logger');
+				$loger->warning('111111');
+
+				if ($request->isMethod("POST")) {
+            if ($form->isValid()) {
+							$loger=$this->get('logger');
+							$loger->warning('222222');
+
+							$data = $form->getData();
+							$to = data[0];
+							$from = 'From: rybar@uniba.sk';
+							$predmet = data[2];
+							$sprava = data[3];
+
+							mail('madarovamaja@gmail.com', $predmet, $sprava, $from);
+							echo "jkjlkjlk";
+
+						}}
+
+	    return $this->render('RobiskApplicationBundle:Subject/Admin:sendMail.html.twig', array('subject' => $subject, 'form' => $form->createView()));
     }
+
 }
