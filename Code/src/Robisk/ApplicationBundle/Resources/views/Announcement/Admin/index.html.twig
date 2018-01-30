@@ -41,7 +41,7 @@
 
                         {% if announcements|length > 0 %}
                             {% for announcement in announcements %}
-                                <div class="col-md-12">
+                                <div class="col-md-12" id='homeworkBox'>
                                     <h3 class="col-md-12">{{ announcement.title }}</h3>
                                     <div class="col-md-12">
                                         <span class="small"> {{ 'admin.subjects.announcements.created'|trans }}: {{ announcement.created|date("d.m.Y H:i:s") }}</span>
@@ -52,6 +52,11 @@
                                     <div class="col-md-12">
                                         {{ announcement.content }}
                                     </div>
+                                    {% if announcement.videoURL is defined and announcement.videoURL is not empty and announcement.videoURL!='null' %}
+                                    <div class="col-md-12">
+                                        <iframe src = "{{ announcement.videoURL }}" id='homeworkVideo'></iframe>
+                                    </div>
+                                    {% endif %}
 
                                     <a class="btn btn-xs btn-warning col-md-2" href="{{ path('route_admin_announcement_edit',
                                     {'id': announcement.subject.id,
@@ -64,6 +69,12 @@
                                         'announcementId': announcement.id}) }}">
                                         <i class="fa fa-fw fa-remove"></i>
                                         {{ 'admin.subjects.announcements.delete'|trans }}
+                                    </a>
+                                    <a class="btn btn-xs btn-success col-md-2" href="{{ path('route_admin_announcement_forum',
+                                    {'id': announcement.subject.id,
+                                        'announcementId': announcement.id}) }}">
+                                        <i class="fa fa-fw fa-group"></i>
+                                        {{ 'admin.subjects.announcements.forum'|trans }}
                                     </a>
                                 </div>
                             {% endfor %}

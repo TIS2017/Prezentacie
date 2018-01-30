@@ -7,7 +7,7 @@ header.admin.users: Študenti
 header.registration: Registrácia
 header.profile: Profil
 
-frontend.announcements.title: Oznamy
+frontend.announcements.title: Domáce úlohy
 frontend.professor: "Vyučujúci: doc. PhDr. Ján Rybár, PhD."
 
 permission.denied: Na prezeranie tohto obsahu stránky nemáte oprávnenia. Prihláste sa.
@@ -16,7 +16,7 @@ permission.denied.subject.1: Na prezeranie obsahu predmetu
 permission.denied.subject.2: nemáte oprávnenia.
 permission.warning.title: Pozor!
 
-announcement.frontend.empty: Momentálne nie sú žiadne oznamy
+announcement.frontend.empty: Momentálne nie sú žiadne Domáce úlohy
 
 navig.home: Oznamy
 navig.subjects: Predmety
@@ -73,8 +73,8 @@ subject.edit.users.declined: Zamietnutí študenti
 subject.edit.attendance.settings: Nastavenia dochádzky
 subject.edit.attendance.add: Pridať dochádzku
 subject.edit.attendance.lock: Uzamkni dochádzku
-subject.edit.announcement.title: Oznamy
-subject.edit.announcement.list: Zoznam oznamov
+subject.edit.announcement.title: Domáce úlohy
+subject.edit.announcement.list: Domáce úlohy
 subject.edit.attendance.students: Celková dochádzka študentov
 subject.edit.lessons: Cvičenia
 subject.season.winter: Zimný semester
@@ -97,9 +97,9 @@ subject.status.unapproved: Nepotvrdený
 subject.status.approved: Potvrdený
 subject.status.declined: Zamietnutý
 subject.enter: Vstúp
-subject.view.announcements.title: Oznamy
-subject.view.announcements.empty: Momentálne nie sú žiadne oznamy
-subject.view.announcements.enter: Zoznam oznamov
+subject.view.announcements.title: Domáce úlohy
+subject.view.announcements.empty: Momentálne nie sú žiadne domáce úlohy
+subject.view.announcements.enter: Domáce úlohy
 subject.view.accouncements.unread: neprečítaných
 subject.view.attendance.title: Dochádzka
 subject.view.attendance.today_title: Dnešná dochádzka
@@ -162,12 +162,14 @@ admin.subjects.announcement.delete.submit: Odstráň
 admin.subjects.announcement.add.submit: Vytvor
 admin.subjects.announcement.title: Nadpis
 admin.subjects.announcement.content: Obsah
-admin.subjects.announcements.title: Oznamy
-admin.subjects.announcements.empty: Momentálne nie sú žiadne oznamy
+admin.subjects.announcement.videoURL: URL odkaz
+admin.subjects.announcements.title: Domáce úlohy
+admin.subjects.announcements.empty: Momentálne nie sú žiadne domáce úlohy
 admin.subjects.announcements.edit: Edituj
 admin.subjects.announcements.created: Vytvorené
 admin.subjects.announcements.updated: Editované
 admin.subjects.announcements.delete: Odstráň
+admin.subjects.announcements.forum: Diskusia
 admin.subjects.settings.title: Nastavenia
 admin.subjects.settings.valuation.title: Hodnotenie
 admin.subjects.settings.submit: Ulož
@@ -199,7 +201,7 @@ table.season: Semester
 table.status: Status
 table.user: Študent
 
-announcements.title: Oznamy
+announcements.title: Domáce úlohy
 
 presentation.valuating.title: Hodnotenie
 presentation.valuating.subtitle: Prezentácia

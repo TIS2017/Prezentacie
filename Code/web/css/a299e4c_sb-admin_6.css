@@ -222,3 +222,35 @@ ul.alert-dropdown {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+
+#homeworkBox {
+  width: 45%;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #CCC;
+  box-shadow: 0 1px 5px #CCC;
+  border-radius: 5px;
+  font-family: verdana;
+  overflow: hidden;
+}
+
+#homeworkBox-opened {
+  width: 100%;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #CCC;
+  box-shadow: 0 1px 5px #CCC;
+  border-radius: 5px;
+  font-family: verdana;
+  overflow: hidden;
+}
+
+#homeworkVideo {
+  height: 480px;
+  width: 600px;
+}
+
+#homeworkVideo-opened {
+  height: 600px;
+  width: 800px;
+}

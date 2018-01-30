@@ -13,3 +13,7 @@ route_admin_announcement_edit:
 route_admin_announcement_delete:
     path: /delete/{id}/{announcementId}
     defaults: { _controller: RobiskApplicationBundle:Admin/AnnouncementAdmin:delete, id: 0, announcementId: 0 }
+
+route_admin_announcement_forum:
+  path: /edit/{id}/{announcementId}/diskusia
+  defaults: {_controller: RobiskApplicationBundle:Admin/AnnouncementAdmin:forum, id: 0, announcementId: 0}

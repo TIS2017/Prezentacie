@@ -264,7 +264,12 @@ class Announcement
      */
     public function setVideoURL($videoURL)
     {
-        $this->videoURL = $videoURL;
+      $result = $videoURL;
+      if (!strpos("youtube.com", $result)) {
+        $result = str_replace("watch?v=", "embed/", $result);
+      }
+
+        $this->videoURL = $result;
     }
 
     /**
