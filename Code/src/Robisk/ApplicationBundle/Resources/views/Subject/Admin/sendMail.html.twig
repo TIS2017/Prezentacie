@@ -37,7 +37,7 @@
                               <div class="form-group">
                                 {% for user in subject.getApprovedUsers() %}
                                 <label>
-                                  <input type="checkbox" value="{{ user.email }}">
+                                  <input type="checkbox" name="{{ user.email }}" value="{{ user.email }}">
                                   {{ user.firstName ~ ' ' ~ user.lastName}}
                               </label>
                               &emsp;
@@ -75,13 +75,11 @@
                               </div>
 
                               <div class="form-group">
-                                <div class="col-md-6"></div>
-                                <a class="btn btn-success col-md-2" href="{{ path('route_send_mail',
-                                {'id': subject.id}) }}">
-                                    <i class="fa fa-send"></i>
-                                    {{ 'subject.send'|trans }}
-                                </a>
-                             </div>
+                                <div class="col-md-4"></div>
+                                <button class="col-md-2 col-md-offset-2 btn btn-success" type="submit">
+                                  <i class="fa fa-send"></i>
+                                  {{ 'subject.send'|trans }}</button>
+                               </div>
                           {% else %}
                             <p class="empty">{{ 'subject.emptyMail'|trans }}</p>
                           {% endif %}

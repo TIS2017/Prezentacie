@@ -468,24 +468,22 @@ class SubjectAdminController extends BaseController {
         $subject = $subjectManager->findOneBy(array('id' => $id));
 
 			  $form = $this->createForm(new SendMailType(), array('csrf_protection' => false));
-				$loger=$this->get('logger');
-				$loger->warning('111111');
 
 				if ($request->isMethod("POST")) {
-            if ($form->isValid()) {
-							$loger=$this->get('logger');
-							$loger->warning('222222');
-
-							$data = $form->getData();
-							$to = data[0];
-							$from = 'From: rybar@uniba.sk';
-							$predmet = data[2];
-							$sprava = data[3];
-
-							mail('madarovamaja@gmail.com', $predmet, $sprava, $from);
-							echo "jkjlkjlk";
-
-						}}
+							$data = $request->request->all();
+							$data2 = $data['robisk_applicationbundle_sendMail'];
+							$from = "From: rybar@uniba.sk \r\n CC: ";
+							$predmet = $data2['subject'];
+							$sprava = $data2['content'];
+							foreach($data as $i){
+								if($i!=$data2){
+									$to = $i;
+									$from = $from . "$to";
+									//var_dump($to, $predmet, $sprava, $from);
+									mail($to, $predmet, $sprava, $from);
+								}
+							}
+						}
 
 	    return $this->render('RobiskApplicationBundle:Subject/Admin:sendMail.html.twig', array('subject' => $subject, 'form' => $form->createView()));
     }

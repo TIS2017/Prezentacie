@@ -1,11 +1,11 @@
 <ul class="nav navbar-nav side-nav">
     {% if is_granted('ROLE_ADMIN') %}
-        <li>
+        <!--<li>
             <a href="{{ path('route_admin') }}">
                 <i class="fa fa-fw fa-cog"></i>
                 {{ 'header.admin'|trans }}
             </a>
-        </li>
+        </li>-->
         <li>
             <a href="{{ path('route_admin_subjects') }}">
                 <i class="fa fa-fw fa-book"></i>
