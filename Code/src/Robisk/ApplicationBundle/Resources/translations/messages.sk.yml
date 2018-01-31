@@ -182,6 +182,7 @@ admin.subjects.announcements.created: Vytvorené
 admin.subjects.announcements.updated: Editované
 admin.subjects.announcements.delete: Odstráň
 admin.subjects.announcements.forum: Diskusia
+admin.subjects.announcement.videoURL: URL odkaz
 admin.subjects.settings.title: Nastavenia
 admin.subjects.settings.valuation.title: Hodnotenie
 admin.subjects.settings.submit: Ulož
