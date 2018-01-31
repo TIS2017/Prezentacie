@@ -68,14 +68,8 @@
                                   <i class="fa fa-fw fa-remove"></i>
                                   {{ 'admin.subjects.announcements.delete'|trans }}
                               </a>
-                              <a class="btn btn-xs btn-success col-md-2" href="{{ path('route_admin_announcement_forum',
-                              {'id': announcement.subject.id,
-                                  'announcementId': announcement.id}) }}">
-                                  <i class="fa fa-fw fa-group"></i>
-                                  {{ 'admin.subjects.announcements.forum'|trans }}
-                              </a>
                           </div>
-                        </div
+                        </div>
 
                     {% else %}
                         <div class="title">{{ 'permission.warning.title'|trans }}</div>

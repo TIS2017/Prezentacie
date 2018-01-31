@@ -117,38 +117,6 @@ class User implements UserInterface
      */
     protected $presentationsCreated;
 
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="AnnouncementsComments", mappedBy="user", cascade={"persist", "remove"})
-     */
-
-    protected $announcementsComments;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="UserPresentationComments", mappedBy="user", cascade={"persist", "remove"})
-     */
-
-    protected $userPresentationComments;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="TeacherPresentationComments", mappedBy="user", cascade={"persist", "remove"})
-     */
-
-    protected $teacherPresentationComments;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="TeacherPresentation", mappedBy="user", cascade={"persist", "remove"})
-     */
-
-    protected $teacherPresentation;
-
     public function __construct()
     {
         $this->role = self::ROLE_USER;
@@ -388,100 +356,11 @@ class User implements UserInterface
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getAttendances()
-    {
-        return $this->attendances;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $attendances
-     */
-    public function setAttendances($attendances)
-    {
-        $this->attendances = $attendances;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getAnnouncementsComments()
-    {
-        return $this->announcementsComments;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $announcementsComments
-     */
-    public function setAnnouncementsComments($announcementsComments)
-    {
-        $this->announcementsComments = $announcementsComments;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getUserPresentationComments()
-    {
-        return $this->userPresentationComments;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $userPresentationComments
-     */
-    public function setUserPresentationComments($userPresentationComments)
-    {
-        $this->userPresentationComments = $userPresentationComments;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getTeacherPresentationComments()
-    {
-        return $this->teacherPresentationComments;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $teacherPresentationComments
-     */
-    public function setTeacherPresentationComments($teacherPresentationComments)
-    {
-        $this->teacherPresentationComments = $teacherPresentationComments;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getTeacherPresentation()
-    {
-        return $this->teacherPresentation;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $teacherPresentation
-     */
-    public function setTeacherPresentation($teacherPresentation)
-    {
-        $this->teacherPresentation = $teacherPresentation;
-    }
-
-    /**
      * Add user attendance lookup
      *
      * @param UserAttendanceLookup $userAttendanceLookup
      * @return User
      */
-
-
-
-
-
-
-
-
-
     public function addUserAttendanceLookup(UserAttendanceLookup $userAttendanceLookup)
     {
         $this->userAttendanceLookup->add($userAttendanceLookup);
@@ -720,6 +599,4 @@ class User implements UserInterface
 
         return false;
     }
-
-
 }

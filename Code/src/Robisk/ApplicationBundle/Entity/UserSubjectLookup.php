@@ -362,6 +362,4 @@ class UserSubjectLookup
             }
         }
     }
-
-
 }
