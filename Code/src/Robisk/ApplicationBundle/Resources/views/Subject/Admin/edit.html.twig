@@ -51,8 +51,18 @@
                             </a>
                             <a class="btn btn-info" href="{{ path('route_admin_announcements',
                             {'id': subject.id}) }}">
-                                <i class="fa fa-fw fa-envelope"></i>
+                                <i class="fa fa-fw fa-pencil"></i>
                                 {{ 'subject.edit.announcement.list'|trans }}
+                            </a>
+                            <a class="btn btn-info" href="{{ path('route_teacher_presentations',
+                                {'id': subject.id}) }}">
+                                <i class="fa fa-fw fa-book"></i>
+                                {{ 'subject.teacherPresentation'|trans }}
+                            </a>
+                            <a class="btn btn-info" href="{{ path('route_send_mail',
+                                {'id': subject.id}) }}">
+                                <i class="fa fa-fw fa-envelope"></i>
+                                {{ 'subject.sendMail'|trans }}
                             </a>
                             <hr>
                         </div>

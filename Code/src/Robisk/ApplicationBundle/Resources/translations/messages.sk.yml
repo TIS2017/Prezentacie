@@ -7,7 +7,7 @@ header.admin.users: Študenti
 header.registration: Registrácia
 header.profile: Profil
 
-frontend.announcements.title: Domáce úlohy
+frontend.announcements.title: Bonusové úlohy
 frontend.professor: "Vyučujúci: doc. PhDr. Ján Rybár, PhD."
 
 permission.denied: Na prezeranie tohto obsahu stránky nemáte oprávnenia. Prihláste sa.
@@ -16,9 +16,9 @@ permission.denied.subject.1: Na prezeranie obsahu predmetu
 permission.denied.subject.2: nemáte oprávnenia.
 permission.warning.title: Pozor!
 
-announcement.frontend.empty: Momentálne nie sú žiadne Domáce úlohy
+announcement.frontend.empty: Momentálne nie sú žiadne bonusové úlohy
 
-navig.home: Oznamy
+navig.home: Bonusové úlohy
 navig.subjects: Predmety
 
 user.register.email: Email
@@ -46,7 +46,13 @@ user.profile.password.submit: Zmeň
 user.login.title: Prihlásenie do systému
 user.login.username: Prihlasovacie meno
 user.login.password: Heslo
+user.login.reset: Zabudnuté heslo?
 user.login.submit: Prihásiť
+
+user.login.titleReset: Obnova hesla
+user.login.doReset: Obnoviť heslo
+user.login.mailReset: Zaslať mail
+user.login.mail: E-mail
 
 user.add.subject: Pridaj predmet
 
@@ -73,10 +79,10 @@ subject.edit.users.declined: Zamietnutí študenti
 subject.edit.attendance.settings: Nastavenia dochádzky
 subject.edit.attendance.add: Pridať dochádzku
 subject.edit.attendance.lock: Uzamkni dochádzku
-subject.edit.announcement.title: Domáce úlohy
-subject.edit.announcement.list: Domáce úlohy
+subject.edit.announcement.title: Bonusové úlohy
+subject.edit.announcement.list: Bonusové úlohy
 subject.edit.attendance.students: Celková dochádzka študentov
-subject.edit.lessons: Cvičenia
+subject.edit.lessons: Prednášky
 subject.season.winter: Zimný semester
 subject.season.summer: Letný semester
 subject.season.label: Semester
@@ -89,7 +95,7 @@ subject.user.unapprove: Vyhoď
 subject.user.approve.empty: Momentálne nie sú žiadni potvrdení študenti
 subject.user.valuation: Hodnotenie
 subject.user.presentation: Prezentácia
-subject.attendance.exercise: cvičenie
+subject.attendance.exercise: prednáška
 subject.attendance.date: Dátum
 subject.attendance.unlocked.warning: Dochádzka nie je uzamknutá!
 subject.attendance.points: Body
@@ -97,9 +103,9 @@ subject.status.unapproved: Nepotvrdený
 subject.status.approved: Potvrdený
 subject.status.declined: Zamietnutý
 subject.enter: Vstúp
-subject.view.announcements.title: Domáce úlohy
-subject.view.announcements.empty: Momentálne nie sú žiadne domáce úlohy
-subject.view.announcements.enter: Domáce úlohy
+subject.view.announcements.title: Bonusové úlohy
+subject.view.announcements.empty: Momentálne nie sú žiadne bonusové úlohy
+subject.view.announcements.enter: Bonusové úlohy
 subject.view.accouncements.unread: neprečítaných
 subject.view.attendance.title: Dochádzka
 subject.view.attendance.today_title: Dnešná dochádzka
@@ -133,6 +139,13 @@ subject.presentation.valuating.presentations.title: Prezentácia
 subject.presentation.valuating.presentations.student: Študent
 subject.presentation.valuating.presentations.options: Možnosti
 subject.presentation.valuating.presentations.valuate: Hodnoť
+subject.teacherPresentation: Prezentácie
+subject.sendMail: Poslať mail
+subject.send: Odošli
+subject.subject: Predmet
+subject.content: Obsah
+subject.emptyMail: Email nie je možné napísať, lebo neexistuje schválený študent, ktorý je zapísaný na predmet
+subject.allReceivers: Označiť všetkých
 
 admin.title: Administrátorská sekcia
 admin.subjects.title: Predmety
@@ -155,21 +168,19 @@ admin.subjects.attendance.add.password: Heslo
 admin.subjects.attendance.add.submit: Pridaj
 admin.subjects.attendance.view.title: Celková dochádzka študentov
 admin.subjects.attendance.view.submit: Ulož
-admin.subjects.announcement.add.title: Pridaj oznam
-admin.subjects.announcement.edit.title: Edituj oznam
+admin.subjects.announcement.add.title: Pridaj bonusovú úlohu
+admin.subjects.announcement.edit.title: Edituj bonusovú úlohu
 admin.subjects.announcement.edit.submit: Edituj
 admin.subjects.announcement.delete.submit: Odstráň
 admin.subjects.announcement.add.submit: Vytvor
 admin.subjects.announcement.title: Nadpis
 admin.subjects.announcement.content: Obsah
-admin.subjects.announcement.videoURL: URL odkaz
-admin.subjects.announcements.title: Domáce úlohy
-admin.subjects.announcements.empty: Momentálne nie sú žiadne domáce úlohy
+admin.subjects.announcements.title: Bonusové úlohy
+admin.subjects.announcements.empty: Momentálne nie sú žiadne bonusové úlohy
 admin.subjects.announcements.edit: Edituj
 admin.subjects.announcements.created: Vytvorené
 admin.subjects.announcements.updated: Editované
 admin.subjects.announcements.delete: Odstráň
-admin.subjects.announcements.forum: Diskusia
 admin.subjects.settings.title: Nastavenia
 admin.subjects.settings.valuation.title: Hodnotenie
 admin.subjects.settings.submit: Ulož
@@ -184,6 +195,7 @@ admin.subjects.settings.valPoint.delete: Odstráň
 admin.subjects.settings.pvpForm.point: Bod hodnotenia
 admin.subjects.settings.pvpForm.height: Váha
 admin.subjects.settings.pvpForm.submit: Ulož
+admin.subjects.sendMail: Poslať mail
 admin.users.title: Študenti
 admin.users.table.name: Meno
 admin.users.table.email: Email
@@ -201,7 +213,7 @@ table.season: Semester
 table.status: Status
 table.user: Študent
 
-announcements.title: Domáce úlohy
+announcements.title: Bonusové úlohy
 
 presentation.valuating.title: Hodnotenie
 presentation.valuating.subtitle: Prezentácia
