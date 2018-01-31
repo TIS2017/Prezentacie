@@ -67,6 +67,26 @@ class Announcement
      */
     protected $updatesCount;
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AnnouncementComments", mappedBy="announcement", cascade={"persist", "remove"})
+     */
+
+    protected $announcementComments;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="video_URL", type="string", length=255, nullable=true, options={"default": NULL})
+     * @Assert\NotBlank()
+     */
+    protected $videoURL;
+
+
+>>>>>>> master
     public function __construct()
     {
         $time = new \DateTime('now');
@@ -248,11 +268,31 @@ class Announcement
 
     public function setVideoURL($videoURL)
     {
+<<<<<<< HEAD
       $result = $videoURL;
       if (!strpos("youtube.com", $result)) {
         $result = str_replace("watch?v=", "embed/", $result);
       }
 
         $this->videoURL = $result;
+=======
+        $this->videoURL = $videoURL;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnnouncementComments()
+    {
+        return $this->announcementComments;
+    }
+
+    /**
+     * @param mixed $announcementComments
+     */
+    public function setAnnouncementComments($announcementComments)
+    {
+        $this->announcementComments = $announcementComments;
+>>>>>>> master
     }
 }
