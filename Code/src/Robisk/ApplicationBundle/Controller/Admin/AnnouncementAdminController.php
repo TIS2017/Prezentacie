@@ -44,9 +44,9 @@ class AnnouncementAdminController extends BaseController
                 $announcement->setSubject($subject);
                 $annManager->update($announcement);
 
-                $url = $this->generateUrl('route_admin_announcements', 
+                $url = $this->generateUrl('route_admin_announcements',
                     array(
-                            'id'             => $subject->getId(), 
+                            'id'             => $subject->getId(),
                     ));
 
                 $response = new RedirectResponse($url);
@@ -88,9 +88,9 @@ class AnnouncementAdminController extends BaseController
             }
         }
 
-        $url = $this->generateUrl('route_admin_announcement_edit', 
+        $url = $this->generateUrl('route_admin_announcement_edit',
             array(
-                    'id'             => $announcement->getSubject()->getId(), 
+                    'id'             => $announcement->getSubject()->getId(),
                     'announcementId' => $announcement->getId(),
             ));
 
@@ -115,11 +115,30 @@ class AnnouncementAdminController extends BaseController
         $announcement = $annManager->findOneBy(array('id' => $announcementId));
         $subject = $announcement->getSubject();
 
-        $annManager->delete($announcement);   
+        $annManager->delete($announcement);
 
         $url = $this->generateUrl('route_admin_announcements', array('id' => $id));
 
         $responce = new RedirectResponse($url);
         return $responce;
     }
+
+  public function forumAction($id, $announcementId){
+    $subjectManager = $this->get('manager_subject');
+    $annManager = $this->get('manager_announcement');
+    $user = $this->getUser();
+    $announcement = $annManager->findOneBy(array('id' => $announcementId));
+
+    $form = $this->createForm(new AnnouncementType(), $announcement, array('csrf_protection' => false));
+
+    return $this->render(
+      'RobiskApplicationBundle:Announcement/Admin:diskusia.html.twig',
+      array(
+        'id' => $announcement->getSubject()->getId(),
+        'announcement' => $announcement,
+        'announcementId' => $announcement->getId(),
+        'subject' => $announcement->getSubject()
+      )
+    );
+  }
 }

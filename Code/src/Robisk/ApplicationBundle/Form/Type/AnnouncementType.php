@@ -11,11 +11,15 @@ class AnnouncementType extends AbstractType
     {
         $builder
             ->add('title', 'text')
-            ->add('content', 'textarea');
+            ->add('content', 'textarea')
+            ->add('videoURL', null, array(
+              'required'   => false,
+              'empty_data' => 'null'));
     }
 
     public function getDefaultOptions(array $options)
     {
+
         return array(
             'csrf_protection' => false
         );
