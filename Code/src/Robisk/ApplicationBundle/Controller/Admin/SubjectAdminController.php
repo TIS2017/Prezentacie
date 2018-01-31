@@ -13,10 +13,11 @@ use Robisk\ApplicationBundle\Form\Type\PresentationValuationPointType;
 use Robisk\ApplicationBundle\Entity\UserSubjectLookup;
 use Robisk\ApplicationBundle\Entity\Attendance;
 use Robisk\ApplicationBundle\Entity\Subject;
+use Robisk\ApplicationBundle\Form\Type\SendMailType;
 
 class SubjectAdminController extends BaseController {
 
-	public function indexAction() 
+	public function indexAction()
 	{
 		$user = $this->getUser();
 		$subjectManager = $this->get('manager_subject');
@@ -49,7 +50,7 @@ class SubjectAdminController extends BaseController {
 				$subjectManager->update($subject);
                 $svManager->update($subjectValuation);
 				$url = $this->generateUrl('route_admin_subject_edit', array('id' => $subject->getId()));
-				
+
 				$response = new RedirectResponse($url);
 				return $response;
 			}
@@ -111,7 +112,7 @@ class SubjectAdminController extends BaseController {
 		$uslManager->update($usl);
 
 		$url = $this->generateUrl('route_admin_subject_edit', array('id' => $id));
-		
+
 		return $this->redirect($url);
 	}
 
@@ -132,7 +133,7 @@ class SubjectAdminController extends BaseController {
 		}
 
 		$url = $this->generateUrl('route_admin_subject_edit', array('id' => $id));
-		
+
 		return $this->redirect($url);
 	}
 
@@ -265,7 +266,7 @@ class SubjectAdminController extends BaseController {
 		$student = $userManager->findOneBy(array('id' => $userId));
 		$usl = $uslManager->findOneBy(array(
 				'user'    => $student,
-				'subject' => $subject 
+				'subject' => $subject
 			));
 
 		return $this->render(
@@ -447,11 +448,44 @@ class SubjectAdminController extends BaseController {
     	$pvpManager = $this->get('manager_presentation_valuation_point');
     	$pvp = $pvpManager->findOneBy(array('id' => $pvpId));
 
-    	$pvpManager->delete($pvp);    	
+    	$pvpManager->delete($pvp);
 
     	$url = $this->generateUrl('route_admin_subject_settings', array('id' => $id));
 
 		$response = new RedirectResponse($url);
 		return $response;
     }
+
+    public function teacherPresentationsAction($id){
+			$subjectManager = $this->get('manager_subject');
+			$subject = $subjectManager->findOneBy(array('id' => $id));
+	    return $this->render('RobiskApplicationBundle:Subject/Admin:teacherPresentations.html.twig', array('subject' => $subject ));
+    }
+
+    public function sendMailAction($id){
+				$request = $this->get('request');
+	    	$subjectManager= $this->get('manager_subject');
+        $subject = $subjectManager->findOneBy(array('id' => $id));
+
+			  $form = $this->createForm(new SendMailType(), array('csrf_protection' => false));
+
+				if ($request->isMethod("POST")) {
+							$data = $request->request->all();
+							$data2 = $data['robisk_applicationbundle_sendMail'];
+							$from = "From: rybar@uniba.sk \r\n CC: ";
+							$predmet = $data2['subject'];
+							$sprava = $data2['content'];
+							foreach($data as $i){
+								if($i!=$data2){
+									$to = $i;
+									$from = $from . "$to";
+									//var_dump($to, $predmet, $sprava, $from);
+									mail($to, $predmet, $sprava, $from);
+								}
+							}
+						}
+
+	    return $this->render('RobiskApplicationBundle:Subject/Admin:sendMail.html.twig', array('subject' => $subject, 'form' => $form->createView()));
+    }
+
 }
