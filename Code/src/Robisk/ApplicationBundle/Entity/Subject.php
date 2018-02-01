@@ -117,6 +117,14 @@ class Subject
     protected $presentationValuationPoints;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TeacherPresentation", mappedBy="subject", cascade={"persist", "remove"})
+     */
+
+    protected $teacherPresentations;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="val_attendance", type="integer", options={"default"=30})
@@ -137,6 +145,7 @@ class Subject
         $this->announcements = new ArrayCollection();
         $this->attendances = new ArrayCollection();
         $this->presentationValuationPoints = new ArrayCollection();
+        $this->teacherPresentations = new ArrayCollection();
         $this->valAttendance = 30;
         $this->valPresentation = 70;
     }
@@ -673,5 +682,39 @@ class Subject
     public function getValSum()
     {
         return $this->valPresentation + $this->valAttendance;
+    }
+
+    /**
+     * Get Teacher presentations
+     *
+     * @return ArrayCollection
+     */
+    public function getTeacherPresentations()
+    {
+        return $this->teacherPresentations;
+    }
+
+    /**
+     * Add TeacherPresentation
+     *
+     * @param TeacherPresentation $teacherPresentation
+     * @return Subject
+     */
+    public function addTeacherPresentation(TeacherPresentation $teacherPresentation)
+    {
+        $this->teacherPresentations->add($teacherPresentation);
+        return $this;
+    }
+
+    /**
+     * Remove TeacherPresentation
+     *
+     * @param TeacherPresentation $teacherPresentation
+     * @return Subject
+     */
+    public function removeTeacherPresentation(TeacherPresentation $teacherPresentation)
+    {
+        $this->teacherPresentations->removeElement($teacherPresentation);
+        return $this;
     }
 }

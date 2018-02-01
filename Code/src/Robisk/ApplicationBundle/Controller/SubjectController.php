@@ -288,4 +288,17 @@ class SubjectController extends BaseController
             )
         );
     }
+
+    public function teacherPresentationViewAction($id){
+        $subjectManager = $this->get('manager_subject');
+
+        $subject = $subjectManager->findOneBy(array('id' => $id));
+
+        return $this->render(
+            'RobiskApplicationBundle:Subject:teacherPresentationView.html.twig',
+            array(
+                'subject'      => $subject,
+            )
+        );
+    }
 }

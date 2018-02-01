@@ -45,3 +45,7 @@ route_subject_presentation_valuating:
 route_subject_user_attendance_add:
     pattern: /{_locale}/attendance-add/{id}
     defaults: { _controller: RobiskApplicationBundle:User:addAttendance, _locale: 'sk', id: 0 }
+
+route_subject_teacher_presentation:
+    pattern: /{_locale}/teacher-presentation/{id}
+    defaults: { _controller: RobiskApplicationBundle:Subject:teacherPresentationView, _locale: 'sk', id: 0 }
