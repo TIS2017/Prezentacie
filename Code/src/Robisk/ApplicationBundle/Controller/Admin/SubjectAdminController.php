@@ -456,12 +456,6 @@ class SubjectAdminController extends BaseController {
 		return $response;
     }
 
-    public function teacherPresentationsAction($id){
-			$subjectManager = $this->get('manager_subject');
-			$subject = $subjectManager->findOneBy(array('id' => $id));
-	    return $this->render('RobiskApplicationBundle:Subject/Admin:teacherPresentations.html.twig', array('subject' => $subject ));
-    }
-
     public function sendMailAction($id){
 				$request = $this->get('request');
 	    	$subjectManager= $this->get('manager_subject');

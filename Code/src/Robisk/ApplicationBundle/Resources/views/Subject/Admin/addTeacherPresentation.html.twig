@@ -1,0 +1,109 @@
+{% extends "RobiskApplicationBundle::Common/layout.html.twig" %}
+
+{% block robisk_application_content %}
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if is_granted('ROLE_ADMIN') %}
+
+                        <h1 class="page-header">{{ 'admin.subjects.teacherPrezentation.add'|trans }}</h1>
+
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="{{ path('route_admin_subjects')  }}">
+                                    <i class="fa fa-fw fa-book"></i>
+                                    {{ 'admin.side-navig.subjects'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('route_admin_subject_edit',
+                                    {'id': subject.id}) }}">
+                                    <i class="fa fa-fw fa-pencil"></i>
+                                    {{ subject.name }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('route_teacher_presentation',
+                                    {'id' : subject.id}) }}">
+                                    <i class="fa fa-fw fa-envelope"></i>
+                                    {{ 'subject.teacherPresentation'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <i class="fa fa-fw fa-plus-circle"></i>
+                                {{ 'admin.subjects.teacherPrezentation.add'|trans }}
+                            </li>
+                        </ol>
+
+                        <form class="form-horizontal" role="form" action="{{ url }}" method="POST" {{ form_enctype(form) }}>
+
+                            <div class="form-group">
+                                <div>
+                                    {{ form_errors(form.date) }}
+                                </div>
+                                <div class="col-md-2 control-label">
+                                    {{ form_label(form.date, 'admin.subjects.attendance.add.date'|trans) }}
+                                </div>
+                                <div class="col-md-3 input-group date" id="datetimepicker">
+                                    {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div>
+                                    {{ form_errors(form.title) }}
+                                </div>
+                                <div class="col-md-2 control-label">
+                                    {{ form_label(form.title, 'subject.presentation.upload.title'|trans) }}
+                                </div>
+                                <div class="col-md-3">
+                                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div>
+                                    {{ form_errors(form.file) }}
+                                </div>
+                                <div class="col-md-2 control-label">
+                                    {{ form_label(form.title, 'subject.presentation.upload.file'|trans) }}
+                                </div>
+                                <div class="col-md-3">
+                                    {{ form_widget(form.file, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="col-md-3 col-md-offset-2 btn btn-success" type="submit">{{ 'subject.presentation.upload.submit'|trans }}</button>
+                            </div>
+                        </form>
+
+                    {% else %}
+                        <div class="title">{{ 'permission.warning.title'|trans }}</div>
+                        <p class="empty">{{ 'permission.denied.admin'|trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if (navigator.userAgent.indexOf('Chrome') != -1) {
+                $('input[type=date]').on('click', function(event) {
+                    event.preventDefault();
+                });
+            }
+
+            $('#datetimepicker').datetimepicker({
+                format: 'YYYY-MM-DD',
+            });
+        });
+    </script>
+
+{% endblock robisk_application_content %}

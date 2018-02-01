@@ -81,6 +81,8 @@ subject.edit.attendance.add: Pridať dochádzku
 subject.edit.attendance.lock: Uzamkni dochádzku
 subject.edit.announcement.title: Bonusové úlohy
 subject.edit.announcement.list: Bonusové úlohy
+subject.edit.teacherPresentation.list : Prezentácie vyučujúceho
+subject.edit.teacherPresentation.empty : Momentálne niesu dostupné žiadne prezentácie
 subject.edit.attendance.students: Celková dochádzka študentov
 subject.edit.lessons: Prednášky
 subject.season.winter: Zimný semester
@@ -198,6 +200,10 @@ admin.subjects.settings.pvpForm.point: Bod hodnotenia
 admin.subjects.settings.pvpForm.height: Váha
 admin.subjects.settings.pvpForm.submit: Ulož
 admin.subjects.sendMail: Poslať mail
+admin.subjects.teacherPrezentation.add : Pridaj prezentáciu
+admin.subjects.teacherPrezentation.name : Názov prezentácie
+admin.subjects.teacherPrezentation.download: Stiahnuť
+admin.subjects.teacherPrezentation.delete: Odstrániť
 admin.users.title: Študenti
 admin.users.table.name: Meno
 admin.users.table.email: Email

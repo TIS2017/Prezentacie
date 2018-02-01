@@ -1,0 +1,70 @@
+{% extends "RobiskApplicationBundle::Common/layout.html.twig" %}
+
+{% block robisk_application_content %}
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if is_granted('ROLE_USER') %}
+
+                        <h1 class="page-header">{{ 'subject.edit.teacherPresentation.list'|trans }}</h1>
+
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="{{ path('route_subjects') }}">
+                                    <i class="fa fa-fw fa-book"></i>
+                                    {{ 'subjects.title'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('route_subject_view',
+                                    {'id': subject.id}) }}">
+                                    <i class="fa fa-fw fa-th-large"></i>
+                                    {{ subject.name }}
+                                </a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-fw fa-book"></i>
+                                {{ 'subject.edit.teacherPresentation.list'|trans }}
+                            </li>
+                        </ol>
+
+                        {% if subject.getTeacherPresentations()|length > 0 %}
+                            <div class="col-lg-10">
+                                <table class="table">
+                                    <tr>
+                                        <th>{{ 'subject.attendance.date'|trans }}</th>
+                                        <th>{{ 'admin.subjects.teacherPrezentation.name'|trans }}</th>
+                                        <th>{{ 'subject.presentation.download'|trans }}</th>
+                                        <th>{{ 'admin.subjects.announcements.forum'|trans }}</th>
+                                    </tr>
+                                    {% for presentation in subject.getTeacherPresentations() %}
+                                        <tr>
+                                            <td>{{ presentation.date|date('d.m.Y') }}</td>
+                                            <td>{{ presentation.getTitle() }}</td>
+                                            <td><a href="{{ path('route_teacher_presentation_save',
+                                                    {'id' : presentation.getId()}) }}">
+                                                    {{ 'admin.subjects.teacherPrezentation.download'|trans }}
+                                                </a>
+                                            </td>
+                                            <td><a class="btn btn-xs btn-success" href="">
+                                                    <i class="fa fa-fw fa-group"></i>
+                                                    {{ 'admin.subjects.announcements.forum'|trans }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="title">{{ 'permission.warning.title'|trans }}</div>
+                        <p class="empty">{{ 'permission.denied.admin'|trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock robisk_application_content %}

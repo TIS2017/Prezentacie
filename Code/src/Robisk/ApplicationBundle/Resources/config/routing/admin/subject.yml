@@ -70,9 +70,21 @@ route_admin_subject_presentation_valuation_point_delete:
     path: /presentation-valuation-point/delete/{id}/{pvpId}
     defaults: { _controller: RobiskApplicationBundle:Admin/SubjectAdmin:deletePresentationValuationPoint, id: 0, pvpId: 0 }
 
-route_teacher_presentations:
-    path: edit/{id}/teacher-presentations
-    defaults: { _controller: RobiskApplicationBundle:Admin/SubjectAdmin:teacherPresentations, id: 0}
+route_teacher_presentation:
+    path: edit/teacher-presentation/{id}
+    defaults: { _controller: RobiskApplicationBundle:Admin/TeacherPresentationAdmin:Index, id: 0}
+
+route_teacher_presentation_add:
+    path: edit/teacher-presentation/add/{id}
+    defaults: { _controller: RobiskApplicationBundle:Admin/TeacherPresentationAdmin:add, id: 0}
+
+route_teacher_presentation_save:
+    path: edit/teacher-presentation/save/{id}
+    defaults: { _controller: RobiskApplicationBundle:Admin/TeacherPresentationAdmin:download, id : 0 }
+
+route_teacher_presentation_delete:
+    path: edit/teacher-presentation/delete/{id}
+    defaults: { _controller: RobiskApplicationBundle:Admin/TeacherPresentationAdmin:delete, id : 0 }
 
 route_send_mail:
     path: edit/{id}/send-mail

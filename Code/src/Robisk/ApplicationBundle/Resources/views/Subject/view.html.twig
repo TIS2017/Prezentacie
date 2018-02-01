@@ -47,6 +47,16 @@
                                     <p>{{ 'subject.view.announcements.empty'|trans }}</p>
                                 {% endif %}
 
+                                <h3>{{ 'subject.edit.teacherPresentation.list'|trans }}</h3>
+                                {% if subject.getTeacherPresentations()|length > 0 %}
+                                    <a href="{{ path('route_subject_teacher_presentation',
+                                        {'id': subject.id}) }}">
+                                        {{ 'subject.teacherPresentation'|trans }}
+                                    </a>
+                                {% else %}
+                                    <p>{{ 'subject.edit.teacherPresentation.empty'|trans }}</p>
+                                {% endif %}
+
                                 <h3>{{ 'subject.view.valuation'|trans }}</h3>
                                 <table class="table">
                                     <tr>

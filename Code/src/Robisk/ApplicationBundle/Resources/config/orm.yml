@@ -35,7 +35,7 @@ services:
         arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\SubjectValuation, @service_container]
 
     manager_teacher_presentation:
-        class: Robisk\ApplicationBundle\Doctrine\Manager\TeacherPresentation
+        class: Robisk\ApplicationBundle\Doctrine\Manager\TeacherPresentationManager
         arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\TeacherPresentation, @service_container]
 
     manager_attendance:
@@ -63,9 +63,9 @@ services:
         arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\UserPresentationCommentsManager, @service_container]
 
     manager_announcement_comments:
-        class: Robisk\ApplicationBundle\Doctrine\Manager\AnnouncementComments
+        class: Robisk\ApplicationBundle\Doctrine\Manager\AnnouncementCommentsManager
         arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\AnnouncementComments, @service_container]
 
     manager_teacher_presentation_comments:
-        class: Robisk\ApplicationBundle\Doctrine\Manager\TeacherPresentationComments
+        class: Robisk\ApplicationBundle\Doctrine\Manager\TeacherPresentationCommentsManager
         arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\TeacherPresentationComments, @service_container]   
