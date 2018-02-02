@@ -1,64 +1,63 @@
 {% extends "RobiskApplicationBundle::Common/layout.html.twig" %}
 
 {% block robisk_application_content %}
-	{% include 'RobiskApplicationBundle:Common:flash_messenger.html.twig' %}
 
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    {% if is_granted('ROLE_USER') %}
-
-                        <h1 class="page-header">{{ 'announcements.title'|trans }}</h1>
+                        <h1 class="page-header">{{ 'admin.subjects.announcements.title'|trans }}</h1>
 
                         <ol class="breadcrumb">
                             <li>
-                                <a href="{{ path('route_subjects') }}">
+                                <a href="{{ path('route_admin_subjects')  }}">
                                     <i class="fa fa-fw fa-book"></i>
-                                    {{ 'subjects.title'|trans }}
+                                    {{ 'admin.side-navig.subjects'|trans }}
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('route_subject_view',
-                                {'id': subject.id}) }}">
-                                    <i class="fa fa-fw fa-th-large"></i>
-                                    {{ subject.name }}
+                                <a href="{{ path('route_admin_subject_edit',
+                                    {'id': subject.id}) }}">
+                                        <i class="fa fa-fw fa-pencil"></i>
+                                        {{ subject.name }}
                                 </a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-fw fa-envelope"></i>
-                                {{ 'announcements.title'|trans }}
+                                {{ 'admin.subjects.announcements.title'|trans }}
                             </li>
                         </ol>
 
                         {% if announcements|length > 0 %}
                             {% for announcement in announcements %}
-                                <div class="col-md-12">
+                                <div class="col-md-12" id='homeworkBox'>
                                     <h3 class="col-md-12">{{ announcement.title }}</h3>
                                     <div class="col-md-12">
-                                        <span class="small">
-                                            {{ 'admin.subjects.announcements.created'|trans }}: {{ announcement.created|date("d.m.Y H:i:s") }}
-                                        </span>
+                                        <span class="small"> {{ 'admin.subjects.announcements.created'|trans }}: {{ announcement.created|date("d.m.Y H:i:s") }}</span>
                                         {% if announcement.created != announcement.updated %}
-                                            <span class="small">
-                                                {{ 'admin.subjects.announcements.updated'|trans }}: {{ announcement.updated|date("d.m.Y H:i:s") }} ({{ announcement.updatesCount }}x)
-                                            </span>
+                                            <span class="small">{{ 'admin.subjects.announcements.updated'|trans }}: {{ announcement.updated|date("d.m.Y H:i") }} ({{ announcement.updatesCount }}x)</span>
                                         {% endif %}
                                     </div>
                                     <div class="col-md-12">
                                         {{ announcement.content }}
                                     </div>
+                                    {% if announcement.videoURL is defined and announcement.videoURL is not empty and announcement.videoURL!='null' %}
+                                    <div class="col-md-12">
+                                        <iframe src = "{{ announcement.videoURL }}" id='homeworkVideo'></iframe>
+                                    </div>
+                                    {% endif %}
+                                    <a class="btn btn-xs btn-success col-md-2" href="{{ path('route_subject_announcements_forum',
+                                    {'id': announcement.subject.id,
+                                        'announcementId': announcement.id}) }}">
+                                        <i class="fa fa-fw fa-group"></i>
+                                        {{ 'admin.subjects.announcements.forum'|trans }}
+                                    </a>
                                 </div>
                             {% endfor %}
 
                         {% else %}
                             <p class="empty">{{ 'admin.subjects.announcements.empty'|trans }}</p>
                         {% endif %}
-
-                    {% else %}
-                        <div class="title">{{ 'permission.warning.title'|trans }}</div>
-                        <p class="empty">{{ 'permission.denied.admin'|trans }}</p>
-                    {% endif %}
                 </div>
             </div>
         </div>
