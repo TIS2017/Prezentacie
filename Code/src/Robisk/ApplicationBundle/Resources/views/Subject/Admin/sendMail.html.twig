@@ -45,7 +45,7 @@
                                 {% endfor %}
                                 <br><br>
                                 <label>
-                                    <input type="checkbox" value="{{ 999 }}">
+                                    <input type="checkbox" onclick="toggle(this)" value="null">
                                     {{ 'subject.allReceivers'|trans}}
                                 </label>
                               </div><br>
@@ -94,5 +94,15 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+    function toggle(source) {
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i] != source)
+            checkboxes[i].checked = source.checked;
+        }
+    }
+    </script>
 
 {% endblock robisk_application_content %}
