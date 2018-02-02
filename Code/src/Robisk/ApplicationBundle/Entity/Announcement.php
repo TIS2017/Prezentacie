@@ -67,12 +67,20 @@ class Announcement
      */
     protected $updatesCount;
 
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AnnouncementComments", mappedBy="announcement", cascade={"persist", "remove"})
+     */
+    protected $comments;
+
     public function __construct()
     {
         $time = new \DateTime('now');
         $this->created = $time;
         $this->updated = $time;
         $this->updatesCount = 0;
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
