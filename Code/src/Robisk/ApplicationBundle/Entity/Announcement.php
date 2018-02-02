@@ -67,12 +67,20 @@ class Announcement
      */
     protected $updatesCount;
 
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AnnouncementComment", mappedBy="announcement", cascade={"persist", "remove"})
+     */
+    protected $comments;
+
     public function __construct()
     {
         $time = new \DateTime('now');
         $this->created = $time;
         $this->updated = $time;
         $this->updatesCount = 0;
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -248,11 +256,19 @@ class Announcement
 
     public function setVideoURL($videoURL)
     {
-      $result = $videoURL;
-      if (!strpos("youtube.com", $result)) {
-        $result = str_replace("watch?v=", "embed/", $result);
-      }
+        $result = $videoURL;
+        if (!strpos("youtube.com", $result)) {
+            $result = str_replace("watch?v=", "embed/", $result);
+        }
 
         $this->videoURL = $result;
+    }
+
+    public function getComments(){
+        return $this->comments;
+    }
+
+    public function addComment(AnnouncementComment $comment){
+        $this->comments->add($comment);
     }
 }

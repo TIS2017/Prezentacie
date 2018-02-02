@@ -122,23 +122,4 @@ class AnnouncementAdminController extends BaseController
         $responce = new RedirectResponse($url);
         return $responce;
     }
-
-  public function forumAction($id, $announcementId){
-    $subjectManager = $this->get('manager_subject');
-    $annManager = $this->get('manager_announcement');
-    $user = $this->getUser();
-    $announcement = $annManager->findOneBy(array('id' => $announcementId));
-
-    $form = $this->createForm(new AnnouncementType(), $announcement, array('csrf_protection' => false));
-
-    return $this->render(
-      'RobiskApplicationBundle:Announcement/Admin:diskusia.html.twig',
-      array(
-        'id' => $announcement->getSubject()->getId(),
-        'announcement' => $announcement,
-        'announcementId' => $announcement->getId(),
-        'subject' => $announcement->getSubject()
-      )
-    );
-  }
 }

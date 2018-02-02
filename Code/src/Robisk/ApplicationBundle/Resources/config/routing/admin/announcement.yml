@@ -15,5 +15,13 @@ route_admin_announcement_delete:
     defaults: { _controller: RobiskApplicationBundle:Admin/AnnouncementAdmin:delete, id: 0, announcementId: 0 }
 
 route_admin_announcement_forum:
-  path: /edit/{id}/{announcementId}/diskusia
-  defaults: {_controller: RobiskApplicationBundle:Admin/AnnouncementAdmin:forum, id: 0, announcementId: 0}
+  path: /diskusia/{id}/{announcementId}
+  defaults: {_controller: RobiskApplicationBundle:Admin/CommentAdmin:announcement, id: 0, announcementId: 0}
+
+route_admin_announcement_forum_delete:
+  path: /diskusia/delete/{id}/{announcementId}/{commentId}
+  defaults: {_controller: RobiskApplicationBundle:Admin/CommentAdmin:announcementDelete, id: 0, announcementId: 0, commentId: 0}
+
+route_admin_announcement_forum_switch:
+  path: /diskusia/switch/{id}/{announcementId}/{commentId}
+  defaults: {_controller: RobiskApplicationBundle:Admin/CommentAdmin:announcementSwitchValuated, id: 0, announcementId: 0, commentId: 0}
