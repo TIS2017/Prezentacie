@@ -26,3 +26,8 @@ logout:
 forgotten_password:
     path: /{_locale}/forgotten
     defaults: { _controller: RobiskApplicationBundle:Security:forgotten, _locale: 'sk' }
+
+reset_password:
+  path: /{_locale}/reset/{salt}
+  defaults: { _controller: RobiskApplicationBundle:Security:resetPassword, _locale: 'sk', salt: "*"}
+  methods: [GET, POST]

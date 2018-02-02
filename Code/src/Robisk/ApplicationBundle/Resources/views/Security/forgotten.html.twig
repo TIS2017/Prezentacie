@@ -8,31 +8,29 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">{{ 'user.login.titleReset'|trans }}</h1>
 
-                    <form class="form-horizontal" role="form" action="{{ path('login_check') }}" method="post">
-                        {% if error %}
-                            <div class="form-group">
-                                <div class="col-md-3 label-warning">
-                                    <i class="fa fa-fw fa-warning"></i>
-                                    {{ error.message }}
-                                </div>
-                            </div>
-                        {% endif %}
+                    <form class="form-horizontal" role="form" method="post">
 
+                      <div class="form-group">
+                          <div>
+                              {{ form_errors(form.mail) }}
+                          </div>
+                          <div class="col-md-1 control-label">
+                              {{ form_label(form.mail, 'user.login.mail'|trans) }}
+                          </div>
+                          <div class="col-md-3">
+                              {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
+                          </div>
+                      </div>
 
-                        <div class="form-group">
-                            <label class="col-md-1 control-label">
-                                <i class="glyphicon glyphicon-user"></i>
-                            </label>
-                            <div class="col-md-2">
-                                <input class="form-control" type="text" id="mail" name="_mail" value="{{ last_username }}" placeholder="{{ 'user.login.mail'|trans }}" />
-                            </div>
-                        </div>
+                      <div class="form-group">
+                        <div class="col-md-1"></div>
+                        <button class="col-md-3 btn btn-success" type="submit">
+                          <i class="fa fa-send"></i>
+                          {{ 'user.login.mailReset'|trans }}</button>
+                       </div>
 
-
-                        <div class="form-group">
-                            <button class="col-md-3 btn btn-success" type="submit">{{ 'user.login.mailReset'|trans }}</button>
-                        </div>
                     </form>
+
                 </div>
             </div>
         </div>

@@ -48,6 +48,8 @@ user.login.username: Prihlasovacie meno
 user.login.password: Heslo
 user.login.reset: Zabudnuté heslo?
 user.login.submit: Prihásiť
+user.login.newPassword: Nové heslo
+user.login.passwordAgain: Zopakujte nové heslo
 
 user.login.titleReset: Obnova hesla
 user.login.doReset: Obnoviť heslo
