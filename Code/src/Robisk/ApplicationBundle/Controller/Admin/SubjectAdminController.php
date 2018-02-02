@@ -479,15 +479,17 @@ class SubjectAdminController extends BaseController {
 
 							foreach($data as $i){
 								if($i!=$data2){
-									$to = $i;
-									//var_dump($to, $predmet, $sprava, $from);
-									$transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')->setUsername('kognitivnevedy')->setPassword('lnboegklgdxoyrlf');
-									$mailer = \Swift_Mailer::newInstance($transport);
-									$message = \Swift_Message::newInstance($predmet)
-									   ->setFrom(array('kognitivnevedy@gmail.com' => $predmet))
-									   ->setTo(array($to => $to))
-									   ->setBody($sprava . "<br><br><strong>Prosím neodpisujte na tento email.</strong><br><br>", 'text/html');
-									$result = $mailer->send($message);
+										if ($i!='null'){
+											$to = $i;
+											//var_dump($to, $predmet, $sprava, $from);
+											$transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')->setUsername('kognitivnevedy')->setPassword('lnboegklgdxoyrlf');
+											$mailer = \Swift_Mailer::newInstance($transport);
+											$message = \Swift_Message::newInstance($predmet)
+											   ->setFrom(array('kognitivnevedy@gmail.com' => $predmet))
+											   ->setTo(array($to => $to))
+											   ->setBody($sprava . "<br><br><strong>Prosím neodpisujte na tento email.</strong><br><br>", 'text/html');
+											$result = $mailer->send($message);
+									}
 								}
 							}
 						}
