@@ -62,9 +62,9 @@ services:
         class: Robisk\ApplicationBundle\Doctrine\Manager\UserPresentationCommentsManager
         arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\UserPresentationCommentsManager, @service_container]
 
-    manager_announcement_comments:
-        class: Robisk\ApplicationBundle\Doctrine\Manager\AnnouncementCommentsManager
-        arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\AnnouncementComments, @service_container]
+    manager_announcement_comment:
+        class: Robisk\ApplicationBundle\Doctrine\Manager\AnnouncementCommentManager
+        arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\AnnouncementComment, @service_container]
 
     manager_teacher_presentation_comments:
         class: Robisk\ApplicationBundle\Doctrine\Manager\TeacherPresentationCommentsManager
