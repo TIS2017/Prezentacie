@@ -18,6 +18,10 @@ route_subject_announcements:
     pattern: /{_locale}/subject/{id}/announcements
     defaults: { _controller: RobiskApplicationBundle:Subject:announcements, _locale: 'sk', id: 0 }
 
+route_subject_announcements_forum:
+    pattern: /{_locale}/subject/{id}/announcements/{announcementId}/students
+    defaults: { _controller: RobiskApplicationBundle:Subject:announcementsForum, _locale: 'sk', id: 0 , announcementId: 0}
+
 route_subject_presentation_upload:
     pattern: /{_locale}/subject/{id}/presentation-upload
     defaults: { _controller: RobiskApplicationBundle:Subject:presentationUpload, _locale: 'sk', id: 0 }
