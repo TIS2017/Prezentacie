@@ -447,7 +447,8 @@ class SubjectAdminController extends BaseController {
 
     	$url = $this->generateUrl('route_admin_subject_user_presentation', array(
     			'id'     => $id,
-    			'userId' => $userId
+    			'userId' => $userId,
+					'presentationId'=> $presentation->getId()
     		));
 
 		$response = new RedirectResponse($url);
