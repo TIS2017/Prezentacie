@@ -253,7 +253,6 @@
                                         {% set tmp = 1 %}
                                         {% for presentation in subject.getPresentingPresentations() %}
                                             {% for student in presentation.getUsers() %}
-                                                {% if not usl.isUserPresentationValuated(student.id, subject.id) %}
                                                     {% if user != student %}
                                                         {% if tmp % 2 == 0 %}
                                                             <tr>
@@ -263,6 +262,7 @@
                                                         <td>{{ presentation.title }}</td>
                                                         <td>{{ student.getNameRev() }}</td>
                                                         <td>
+																													{% if not usl.isUserPresentationValuated(student.id, subject.id) %}
                                                             <a class="btn btn-xs btn-info" href="{{ path('route_subject_presentation_valuating',
                                                             {'id': subject.id, 'userId': student.id}) }}">
                                                                 <i class="fa fa-fw fa-calculator"></i>
@@ -336,7 +336,7 @@
 
 
 
-		
+
 		<div>
 		<br/>
 
@@ -354,7 +354,7 @@
 
 
 
-	
+
 {% else %}
 	<div class="title">{{ 'permission.warning.title'|trans }}</div>
 	<p class="empty">{{ 'permission.denied'|trans }}</p>
