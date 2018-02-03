@@ -61,6 +61,18 @@ class TeacherPresentation
     protected $date;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TeacherPresentationComment", mappedBy="presentation")
+     */
+    protected $comments;
+
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * @return int
      */
     public function getId()
@@ -219,5 +231,13 @@ class TeacherPresentation
         return null === $this->path
             ? null
             : $this->getUploadRootDir().'/'.$this->getPath();
+    }
+
+    public function getComments(){
+        return $this->comments;
+    }
+
+    public function addComment(TeacherPresentationComment $comment){
+        $this->comments->add($comment);
     }
 }

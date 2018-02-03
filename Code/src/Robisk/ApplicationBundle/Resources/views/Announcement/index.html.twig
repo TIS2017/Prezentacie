@@ -10,13 +10,13 @@
 
                         <ol class="breadcrumb">
                             <li>
-                                <a href="{{ path('route_admin_subjects')  }}">
+                                <a href="{{ path('route_subjects')  }}">
                                     <i class="fa fa-fw fa-book"></i>
                                     {{ 'admin.side-navig.subjects'|trans }}
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path('route_admin_subject_edit',
+                                <a href="{{ path('route_subject_view',
                                     {'id': subject.id}) }}">
                                         <i class="fa fa-fw fa-pencil"></i>
                                         {{ subject.name }}

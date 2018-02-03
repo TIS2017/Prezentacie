@@ -14,6 +14,7 @@ use Robisk\ApplicationBundle\Entity\UserSubjectLookup;
 use Robisk\ApplicationBundle\Entity\Attendance;
 use Robisk\ApplicationBundle\Entity\Subject;
 use Robisk\ApplicationBundle\Form\Type\SendMailType;
+use Robisk\ApplicationBundle\Form\Type\CommentType;
 
 class SubjectAdminController extends BaseController {
 
@@ -342,24 +343,72 @@ class SubjectAdminController extends BaseController {
 		return $response;
 	}
 
-	public function userPresentationAction($id, $userId)
+	public function userPresentationAction($id, $userId, $presentationId)
 	{
 		$subjectManager = $this->get('manager_subject');
 		$userManager = $this->get('manager_user');
-		$user = $this->getUser();
+		$commentManager = $this->get('manager_user_presentation_comment');
+		$presentationManager = $this->get('manager_presentation');
 
+		$request = $this->get('request');
+		$presentation = $presentationManager->findOneBy(array('id' => $presentationId));
 		$subject = $subjectManager->findOneBy(array('id' => $id));
 		$student = $userManager->findOneBy(array('id' => $userId));
+        $user = $this->getUser();
+
+        $comment = $commentManager->create();
+
+        $form = $this->createForm(new CommentType(), $comment, array('csrf_protection' => false));
+
+        $url = $this->generateUrl('route_admin_subject_user_presentation',
+            array(
+                'id'             => $id,
+                'userId'         => $userId,
+                'presentationId' => $presentationId
+            ));
+
+        if ($request->isMethod("POST")) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+
+                $comment->setUser($this->getUser());
+                $comment->setPresentation($presentation);
+                $comment->setDate(new \DateTime("now"));
+
+                $commentManager->update($comment);
+
+                $response = new RedirectResponse($url);
+                return $response;
+            }
+        }
 
 		return $this->render(
             'RobiskApplicationBundle:Subject/Admin:userPresentation.html.twig',
             array(
    					'subject' => $subject,
    					'student' => $student,
-   					'user'    => $user
+   					'user'    => $user,
+                    'presentation' => $presentation,
+                    'form' => $form->createView(),
+                    'url'  => $url
             )
         );
 	}
+
+    public function userPresentationDeleteCommentAction($id, $userId, $presentationId, $commentId){
+        $commentManager = $this->get('manager_user_presentation_comment');
+        $comment = $commentManager->findOneBy(array('id' => $commentId));
+        $commentManager->delete($comment);
+
+        $url = $this->generateUrl('route_admin_subject_user_presentation',
+            array(
+                'id'             => $id,
+                'userId'         => $userId,
+                'presentationId' => $presentationId
+            ));
+        $response = new RedirectResponse($url);
+        return $response;
+    }
 
 	public function presentationDownloadAction($id, $userId)
     {

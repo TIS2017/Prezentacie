@@ -124,6 +124,20 @@ class User implements UserInterface
      */
     protected $announcementComments;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TeacherPresentationComment", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $teacherPresentationComments;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="UserPresentationComment", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $userPresentationComments;
+
     public function __construct()
     {
         $this->role = self::ROLE_USER;
@@ -139,6 +153,7 @@ class User implements UserInterface
         $this->lastVisitedAnnouncements = new \DateTime('1990-01-01 00:00:00');
         $this->presentationsCreated = new \Doctrine\Common\Collections\ArrayCollection();
         $this->announcementComments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->teacherPresentationComments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

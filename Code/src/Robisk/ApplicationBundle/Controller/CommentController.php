@@ -1,15 +1,14 @@
 <?php
 
-namespace Robisk\ApplicationBundle\Controller\Admin;
+namespace Robisk\ApplicationBundle\Controller;
 
-use Robisk\ApplicationBundle\Controller\BaseController;
-use Robisk\ApplicationBundle\Form\Type\CommentType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Robisk\ApplicationBundle\Form\Type\CommentType;
 
-class CommentAdminController extends BaseController
+class CommentController extends BaseController
 {
-    public function announcementForumAction($id, $announcementId){
+    public function announcementUserForumAction($id, $announcementId){
         $annManager = $this->get('manager_announcement');
         $commentManager = $this->get('manager_announcement_comment');
         $subjectManager = $this->get('manager_subject');
@@ -22,7 +21,7 @@ class CommentAdminController extends BaseController
 
         $form = $this->createForm(new CommentType(), $comment, array('csrf_protection' => false));
 
-        $url = $this->generateUrl('route_admin_announcement_forum',
+        $url = $this->generateUrl('route_subject_announcements_forum',
             array(
                 'id'             => $id,
                 'announcementId' => $announcementId
@@ -44,7 +43,7 @@ class CommentAdminController extends BaseController
         }
 
         return $this->render(
-            'RobiskApplicationBundle:Comment/Admin:announcementAdminForum.html.twig',
+            'RobiskApplicationBundle:Comment:announcementUserForum.html.twig',
             array(
                 'id' => $announcement->getSubject()->getId(),
                 'announcement' => $announcement,
@@ -56,12 +55,12 @@ class CommentAdminController extends BaseController
         );
     }
 
-    public function announcementForumDeleteAction($id, $announcementId, $commentId){
+    public function announcementUserForumDeleteAction($id, $announcementId, $commentId){
         $commentManager = $this->get('manager_announcement_comment');
         $comment = $commentManager->findOneBy(array('id' => $commentId));
         $commentManager->delete($comment);
 
-        $url = $this->generateUrl('route_admin_announcement_forum',
+        $url = $this->generateUrl('route_subject_announcements_forum',
             array(
                 'id'             => $id,
                 'announcementId' => $announcementId
@@ -70,23 +69,7 @@ class CommentAdminController extends BaseController
         return $response;
     }
 
-    public function announcementForumSwitchValuatedAction($id, $announcementId, $commentId){
-        $commentManager = $this->get('manager_announcement_comment');
-        $comment = $commentManager->findOneBy(array('id' => $commentId));
-
-        $comment->setValuated(($comment->getValuated() + 1) % 2);
-        $commentManager->update($comment);
-
-        $url = $this->generateUrl('route_admin_announcement_forum',
-            array(
-                'id'             => $id,
-                'announcementId' => $announcementId
-            ));
-        $response = new RedirectResponse($url);
-        return $response;
-    }
-
-    public function teacherPresentationForumAction($id, $presentationId){
+    public function teacherPresentationUserForumAction($id, $presentationId){
         $presentationManager = $this->get('manager_teacher_presentation');
         $commentManager = $this->get('manager_teacher_presentation_comment');
         $subjectManager = $this->get('manager_subject');
@@ -99,7 +82,7 @@ class CommentAdminController extends BaseController
 
         $form = $this->createForm(new CommentType(), $comment, array('csrf_protection' => false));
 
-        $url = $this->generateUrl('route_teacher_presentation_forum',
+        $url = $this->generateUrl('route_subject_teacher_presentations_forum',
             array(
                 'id'             => $id,
                 'presentationId' => $presentationId
@@ -121,7 +104,7 @@ class CommentAdminController extends BaseController
         }
 
         return $this->render(
-            'RobiskApplicationBundle:Comment/Admin:teacherPresentationAdminForum.html.twig',
+            'RobiskApplicationBundle:Comment:teacherPresentationUserForum.html.twig',
             array(
                 'presentation' => $presentation,
                 'subject' => $subject,
@@ -132,12 +115,12 @@ class CommentAdminController extends BaseController
         );
     }
 
-    public function teacherPresentationForumDeleteAction($id, $presentationId, $commentId){
+    public function teacherPresentationUserForumDeleteAction($id, $presentationId, $commentId){
         $commentManager = $this->get('manager_teacher_presentation_comment');
         $comment = $commentManager->findOneBy(array('id' => $commentId));
         $commentManager->delete($comment);
 
-        $url = $this->generateUrl('route_teacher_presentation_forum',
+        $url = $this->generateUrl('route_subject_teacher_presentations_forum',
             array(
                 'id'             => $id,
                 'presentationId' => $presentationId
@@ -145,4 +128,5 @@ class CommentAdminController extends BaseController
         $response = new RedirectResponse($url);
         return $response;
     }
+
 }

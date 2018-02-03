@@ -27,8 +27,8 @@ route_admin_subject_user_valuation:
     defaults: { _controller: RobiskApplicationBundle:Admin/SubjectAdmin:userValuation, id: 0, userId: 0 }
 
 route_admin_subject_user_presentation:
-    path: /user-presentation/{id}/{userId}
-    defaults: { _controller: RobiskApplicationBundle:Admin/SubjectAdmin:userPresentation, id: 0, userId: 0 }
+    path: /user-presentation/{id}/{userId}/{presentationId}
+    defaults: { _controller: RobiskApplicationBundle:Admin/SubjectAdmin:userPresentation, id: 0, userId: 0, presentationId: 0 }
 
 route_admin_subject_user_presentation_download:
     path: /user-presentation-download/{id}/{userId}
@@ -85,6 +85,18 @@ route_teacher_presentation_save:
 route_teacher_presentation_delete:
     path: edit/teacher-presentation/delete/{id}
     defaults: { _controller: RobiskApplicationBundle:Admin/TeacherPresentationAdmin:delete, id : 0 }
+
+route_teacher_presentation_forum:
+    path: edit/teacher-presentation/diskusia/{id}/{presentationId}
+    defaults: { _controller: RobiskApplicationBundle:Admin/CommentAdmin:teacherPresentationForum, id : 0, presentationId : 0 }
+
+route_teacher_presentation_forum_delete:
+    path: edit/teacher-presentation/diskusia/{id}/{presentationId}/{commentId}
+    defaults: { _controller: RobiskApplicationBundle:Admin/CommentAdmin:teacherPresentationForumDelete, id : 0, presentationId : 0, commentId : 0 }
+
+route_user_presentation_forum_delete:
+    path: /user-presentation/delete-comment/{id}/{userId}/{presentationId}/{commentId}
+    defaults: { _controller: RobiskApplicationBundle:Admin/SubjectAdmin:userPresentationDeleteComment, id : 0, userId : 0, presentationId : 0, commentId: 0 }
 
 route_send_mail:
     path: edit/{id}/send-mail

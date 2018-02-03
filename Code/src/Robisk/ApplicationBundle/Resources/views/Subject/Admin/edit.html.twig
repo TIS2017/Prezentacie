@@ -246,7 +246,7 @@
                                             <td>
                                                 {% if student.getPresentation(subject.id) != null %}
                                                     <a class="btn btn-xs btn-success" href="{{ path('route_admin_subject_user_presentation',
-                                                    {'id': subject.id, 'userId': student.id}) }}">
+                                                    {'id': subject.id, 'userId': student.id, 'presentationId': student.getPresentation(subject.id).getId()}) }}">
                                                         <i class="fa fa-fw fa-film"></i>
                                                         {{ 'subject.user.presentation'|trans }}
                                                     </a>

@@ -58,14 +58,14 @@ services:
         class: Robisk\ApplicationBundle\Doctrine\Manager\UserSubjectPresentationLookupManager
         arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\UserSubjectPresentationLookup, @service_container]
 
-    manager_user_presentation_comments:
-        class: Robisk\ApplicationBundle\Doctrine\Manager\UserPresentationCommentsManager
-        arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\UserPresentationCommentsManager, @service_container]
+    manager_user_presentation_comment:
+        class: Robisk\ApplicationBundle\Doctrine\Manager\UserPresentationCommentManager
+        arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\UserPresentationComment, @service_container]
 
     manager_announcement_comment:
         class: Robisk\ApplicationBundle\Doctrine\Manager\AnnouncementCommentManager
         arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\AnnouncementComment, @service_container]
 
-    manager_teacher_presentation_comments:
-        class: Robisk\ApplicationBundle\Doctrine\Manager\TeacherPresentationCommentsManager
-        arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\TeacherPresentationComments, @service_container]   
+    manager_teacher_presentation_comment:
+        class: Robisk\ApplicationBundle\Doctrine\Manager\TeacherPresentationCommentManager
+        arguments: [@doctrine.orm.entity_manager, Robisk\ApplicationBundle\Entity\TeacherPresentationComment, @service_container]
