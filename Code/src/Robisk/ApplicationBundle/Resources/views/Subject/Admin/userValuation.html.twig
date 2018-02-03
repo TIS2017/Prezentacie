@@ -80,12 +80,17 @@
                                 <tr>
                                     <td>{{ 'subject.view.mark.point.attendance'|trans }}</td>
                                     <td>{{ usl.getAttendancePoints()|round(2) }}</td>
-                                    <td>{{ subject.getValPresentation }}</td>
+                                    <td>{{ subject.getValAttendance() }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Bonusové úlohy</td>
+                                    <td>{{ usl.getCommentPoints()|round(2) }}</td>
+                                    <td>{{ subject.getValComment() }}</td>
                                 </tr>
                                 <tr>
                                     <td>{{ 'subject.view.mark.point.summ'|trans }}</td>
                                     <td>{{ usl.getPointsCount()|round(2) }}</td>
-                                    <td>{{ subject.getValSum }}</td>
+                                    <td>{{ subject.getValSum() }}</td>
                                 </tr>
                                 <tr>
                                     <th>{{ 'subject.view.mark.point.mark'|trans }}</th>

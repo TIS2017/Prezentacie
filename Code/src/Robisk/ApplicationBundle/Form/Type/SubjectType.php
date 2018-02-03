@@ -68,6 +68,10 @@ class SubjectType extends AbstractType
                 ->add(
                     'valAttendance',
                     'text'
+                )
+                ->add(
+                    'valComment',
+                    'text'
                 );
         };
 

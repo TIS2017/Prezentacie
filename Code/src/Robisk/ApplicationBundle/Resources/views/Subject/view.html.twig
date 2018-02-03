@@ -103,6 +103,11 @@
                                         <td>{{ subject.getValAttendance }}</td>
                                     </tr>
                                     <tr>
+                                        <td>Bonusové úlohy</td>
+                                        <td>{{ usl.getCommentPoints()|round(2) }}</td>
+                                        <td>{{ subject.getValComment }}</td>
+                                    </tr>
+                                    <tr>
                                         <td>{{ 'subject.view.mark.point.summ'|trans }}</td>
                                         <td>{{ usl.getPointsCount()|round(2) }}</td>
                                         <td>{{ subject.getValSum }}</td>
