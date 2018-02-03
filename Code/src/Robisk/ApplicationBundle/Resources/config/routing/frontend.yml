@@ -63,5 +63,13 @@ route_subject_teacher_presentations_forum:
     defaults: { _controller: RobiskApplicationBundle:Comment:teacherPresentationUserForum, _locale: 'sk', id: 0 , presentationId: 0}
 
 route_subject_teacher_presentations_forum_delete:
-    pattern: /{_locale}/subject/teacher-presentation/diskusia//delete/{id}/{presentationId}/{commentId}
+    pattern: /{_locale}/subject/teacher-presentation/diskusia/delete/{id}/{presentationId}/{commentId}
     defaults: { _controller: RobiskApplicationBundle:Comment:teacherPresentationUserForumDelete, _locale: 'sk', id: 0 , presentationId: 0, commentId: 0}
+
+route_subject_presentation_forum:
+    pattern: /{_locale}/subject/user-presentation/diskusia/{id}/{presentationId}
+    defaults: { _controller: RobiskApplicationBundle:Comment:userPresentationForum, _locale: 'sk', id: 0 , presentationId: 0}
+
+route_subject_user_presentations_forum_delete:
+    pattern: /{_locale}/subject/user-presentation/diskusia/delete/{id}/{presentationId}/{commentId}
+    defaults: { _controller: RobiskApplicationBundle:Comment:userPresentationUserForumDelete, _locale: 'sk', id: 0 , presentationId: 0, commentId: 0}

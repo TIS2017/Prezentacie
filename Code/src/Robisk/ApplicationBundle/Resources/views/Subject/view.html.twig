@@ -249,11 +249,12 @@
                                             <th>{{ 'subject.presentation.valuating.presentations.title'|trans }}</th>
                                             <th>{{ 'subject.presentation.valuating.presentations.student'|trans }}</th>
                                             <th>{{ 'subject.presentation.valuating.presentations.options'|trans }}</th>
+                                            <th>{{ 'admin.subjects.announcements.forum'|trans }}</th>
                                         </tr>
                                         {% set tmp = 1 %}
                                         {% for presentation in subject.getPresentingPresentations() %}
                                             {% for student in presentation.getUsers() %}
-                                                    {% if user != student %}
+                                                {% if user != student %}
                                                         {% if tmp % 2 == 0 %}
                                                             <tr>
                                                         {% else %}
@@ -262,16 +263,23 @@
                                                         <td>{{ presentation.title }}</td>
                                                         <td>{{ student.getNameRev() }}</td>
                                                         <td>
-																													{% if not usl.isUserPresentationValuated(student.id, subject.id) %}
+                                                        {% if not usl.isUserPresentationValuated(student.id, subject.id) %}
                                                             <a class="btn btn-xs btn-info" href="{{ path('route_subject_presentation_valuating',
                                                             {'id': subject.id, 'userId': student.id}) }}">
                                                                 <i class="fa fa-fw fa-calculator"></i>
                                                                 {{ 'subject.presentation.valuating.presentations.valuate'|trans }}
                                                             </a>
+                                                        {% endif %}
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-xs btn-success" href="{{ path('route_subject_presentation_forum',
+                                                                {'id': subject.id, 'presentationId': presentation.getId()}) }}">
+                                                                <i class="fa fa-fw fa-group"></i>
+                                                                {{ 'admin.subjects.announcements.forum'|trans }}
+                                                            </a>
                                                         </td>
                                                         </tr>
                                                         {% set tmp = tmp +1 %}
-                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         {% endfor %}
