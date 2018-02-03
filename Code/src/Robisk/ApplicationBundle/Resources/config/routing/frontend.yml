@@ -18,10 +18,6 @@ route_subject_announcements:
     pattern: /{_locale}/subject/{id}/announcements
     defaults: { _controller: RobiskApplicationBundle:Subject:announcements, _locale: 'sk', id: 0 }
 
-route_subject_announcements_forum:
-    pattern: /{_locale}/subject/{id}/announcements/{announcementId}/students
-    defaults: { _controller: RobiskApplicationBundle:Subject:announcementsForum, _locale: 'sk', id: 0 , announcementId: 0}
-
 route_subject_presentation_upload:
     pattern: /{_locale}/subject/{id}/presentation-upload
     defaults: { _controller: RobiskApplicationBundle:Subject:presentationUpload, _locale: 'sk', id: 0 }
@@ -53,3 +49,27 @@ route_subject_user_attendance_add:
 route_subject_teacher_presentation:
     pattern: /{_locale}/teacher-presentation/{id}
     defaults: { _controller: RobiskApplicationBundle:Subject:teacherPresentationView, _locale: 'sk', id: 0 }
+
+route_subject_announcements_forum:
+    pattern: /{_locale}/subject/diskusia/announcements/{id}/{announcementId}
+    defaults: { _controller: RobiskApplicationBundle:Comment:announcementUserForum, _locale: 'sk', id: 0 , announcementId: 0}
+
+route_subject_announcements_forum_delete:
+    pattern: /{_locale}/subject/announcements/diskusia/delete/{id}/{announcementId}/{commentId}
+    defaults: { _controller: RobiskApplicationBundle:Comment:announcementUserForumDelete, _locale: 'sk', id: 0 , announcementId: 0, commentId: 0}
+
+route_subject_teacher_presentations_forum:
+    pattern: /{_locale}/subject/teacher-presentation/diskusia/{id}/{presentationId}
+    defaults: { _controller: RobiskApplicationBundle:Comment:teacherPresentationUserForum, _locale: 'sk', id: 0 , presentationId: 0}
+
+route_subject_teacher_presentations_forum_delete:
+    pattern: /{_locale}/subject/teacher-presentation/diskusia/delete/{id}/{presentationId}/{commentId}
+    defaults: { _controller: RobiskApplicationBundle:Comment:teacherPresentationUserForumDelete, _locale: 'sk', id: 0 , presentationId: 0, commentId: 0}
+
+route_subject_presentation_forum:
+    pattern: /{_locale}/subject/user-presentation/diskusia/{id}/{presentationId}
+    defaults: { _controller: RobiskApplicationBundle:Comment:userPresentationForum, _locale: 'sk', id: 0 , presentationId: 0}
+
+route_subject_user_presentations_forum_delete:
+    pattern: /{_locale}/subject/user-presentation/diskusia/delete/{id}/{presentationId}/{commentId}
+    defaults: { _controller: RobiskApplicationBundle:Comment:userPresentationUserForumDelete, _locale: 'sk', id: 0 , presentationId: 0, commentId: 0}

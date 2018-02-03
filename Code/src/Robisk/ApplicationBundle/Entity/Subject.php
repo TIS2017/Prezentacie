@@ -134,9 +134,16 @@ class Subject
     /**
      * @var integer
      *
-     * @ORM\Column(name="val_presentation", type="integer", options={"default"=70})
+     * @ORM\Column(name="val_presentation", type="integer", options={"default"=40})
      */
     protected $valPresentation;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="val_comment", type="integer", options={"default"=30})
+     */
+    protected $valComment;
 
     public function __construct()
     {
@@ -147,7 +154,8 @@ class Subject
         $this->presentationValuationPoints = new ArrayCollection();
         $this->teacherPresentations = new ArrayCollection();
         $this->valAttendance = 30;
-        $this->valPresentation = 70;
+        $this->valPresentation = 40;
+        $this->valComment = 30;
     }
 
     /**
@@ -681,7 +689,7 @@ class Subject
      */
     public function getValSum()
     {
-        return $this->valPresentation + $this->valAttendance;
+        return $this->valPresentation + $this->valAttendance + $this->valComment;
     }
 
     /**
@@ -716,5 +724,13 @@ class Subject
     {
         $this->teacherPresentations->removeElement($teacherPresentation);
         return $this;
+    }
+
+    public function getValComment(){
+        return $this->valComment;
+    }
+
+    public function setValComment($valComment){
+        $this->valComment = $valComment;
     }
 }

@@ -70,10 +70,18 @@ class Presentation
      */
     protected $owner;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="UserPresentationComment", mappedBy="presentation")
+     */
+    protected $comments;
+
     public function __construct()
     {
         $this->userSubjectLookup = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = self::STATUS_NOT_PRESENTED;
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -342,6 +350,10 @@ class Presentation
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    public function getComments(){
+        return $this->comments;
     }
 
 }

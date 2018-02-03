@@ -292,6 +292,33 @@ class UserSubjectLookup
     }
 
     /**
+     * Get points for comments
+     *
+     * @return integer
+     */
+    public function getCommentPoints()
+    {
+        $ann =$this->getSubject()->getAnnouncements();
+        if (count($ann) == 0 ) {
+            return 0;
+        }
+
+        $points = 0;
+        foreach ($ann as $announcement) {
+            foreach ($announcement->getComments() as $comment){
+                if (($comment->getUser()->getId() == $this->getUser()->getId()) && ($comment->getValuated())){
+                    $points++;
+                }
+            }
+        }
+
+        $temp = (100/count($ann))*$points;
+        $result = ($this->getSubject()->getValComment()/100)*$temp;
+
+        return $result;
+    }
+
+    /**
      * Get points for presentation
      *
      * @return integer
@@ -329,7 +356,7 @@ class UserSubjectLookup
      */
     public function getPointsCount()
     {
-        return $this->getAttendancePoints() + $this->getPresentationPoints();
+        return $this->getAttendancePoints() + $this->getPresentationPoints() + $this->getCommentPoints();
     }
 
     /**

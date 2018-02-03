@@ -16,12 +16,12 @@ route_admin_announcement_delete:
 
 route_admin_announcement_forum:
   path: /diskusia/{id}/{announcementId}
-  defaults: {_controller: RobiskApplicationBundle:Admin/CommentAdmin:announcement, id: 0, announcementId: 0}
+  defaults: {_controller: RobiskApplicationBundle:Admin/CommentAdmin:announcementForum, id: 0, announcementId: 0}
 
 route_admin_announcement_forum_delete:
   path: /diskusia/delete/{id}/{announcementId}/{commentId}
-  defaults: {_controller: RobiskApplicationBundle:Admin/CommentAdmin:announcementDelete, id: 0, announcementId: 0, commentId: 0}
+  defaults: {_controller: RobiskApplicationBundle:Admin/CommentAdmin:announcementForumDelete, id: 0, announcementId: 0, commentId: 0}
 
 route_admin_announcement_forum_switch:
   path: /diskusia/switch/{id}/{announcementId}/{commentId}
-  defaults: {_controller: RobiskApplicationBundle:Admin/CommentAdmin:announcementSwitchValuated, id: 0, announcementId: 0, commentId: 0}
+  defaults: {_controller: RobiskApplicationBundle:Admin/CommentAdmin:announcementForumSwitchValuated, id: 0, announcementId: 0, commentId: 0}

@@ -1,10 +1,6 @@
 {% extends "RobiskApplicationBundle::Common/layout.html.twig" %}
 
 {% block robisk_application_content %}
-	{% include 'RobiskApplicationBundle:Common:flash_messenger.html.twig' %}
-    {% if presentation == null %}
-        {% set presentation = student.getPresentation(subject.id) %}
-    {% endif %}
 
     <div id="page-wrapper">
         <div class="container-fluid">
@@ -12,7 +8,7 @@
                 <div class="col-lg-12">
                     {% if is_granted('ROLE_ADMIN') %}
 
-                        <h1 class="page-header">{{ 'admin.subjects.user.presentation.title'|trans }}: {{ student.getNameRev }}</h1>
+                        <h1 class="page-header">{{ presentation.getTitle() }}</h1>
 
                         <ol class="breadcrumb">
                             <li>
@@ -23,65 +19,32 @@
                             </li>
                             <li>
                                 <a href="{{ path('route_admin_subject_edit',
-                                {'id': subject.id}) }}">
+                                    {'id': subject.id}) }}">
                                     <i class="fa fa-fw fa-pencil"></i>
                                     {{ subject.name }}
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ path('route_teacher_presentation',
+                                    {'id': subject.id}) }}">
+                                    <i class="fa fa-fw fa-envelope"></i>
+                                    {{ 'subject.teacherPresentation'|trans }}
+                                </a>
+                            </li>
+
                             <li class="active">
-                                <i class="fa fa-fw fa-film"></i>
-                                {{ 'admin.subjects.user.presentation.title'|trans }}: {{ student.getNameRev }}
+                                <i class="fa fa-fw fa-envelope"></i>
+                                {{ presentation.getTitle() }}
                             </li>
                         </ol>
-
-                        <h3>{{ 'admin.subjects.user.presentation.title'|trans }}</h3>
-                        <p>
+                        <p style="margin:20px">
                             {{ 'admin.subjects.user.presentation.download'|trans }}:
-                            <a class="btn btn-xs btn-success" href="{{ path('route_admin_subject_user_presentation_download',
-                            {'id': subject.id, 'userId': student.id}) }}">
+                            <br><br>
+                            <a class="btn btn-xs btn-success" href="{{ path('route_teacher_presentation_save',
+                                {'id' : presentation.getId()}) }}">
                                 <i class="fa fa-fw fa-download"></i>
                                 {{ presentation.title }}
                             </a>
-                        </p>
-
-                        {% set tmp = 1 %}
-                        ({% for coWorker in presentation.getUsers %}
-                            {% if tmp == 1 %}
-                                {{ coWorker.getNameRev }}
-                            {% else %}
-                                , {{ coWorker.getNameRev }}
-                            {% endif %}
-                            {% set tmp = tmp +1 %}
-                        {% endfor %})
-
-                        <h3>{{ 'admin.subjects.user.presentation.status'|trans }}:
-                            {% if presentation.status == 0 %}
-                                {% set status = 'admin.subjects.user.presentation.status.notPresented'|trans %}
-                            {% endif %}
-                            {% if presentation.status == 1 %}
-                                {% set status = 'admin.subjects.user.presentation.status.presented'|trans %}
-                            {% endif %}
-                            {% if presentation.status == 2 %}
-                                {% set status = 'admin.subjects.user.presentation.status.valuated'|trans %}
-                            {% endif %}
-                            {{ status }}
-                        </h3>
-
-                        <p class="error">{{ 'admin.subject.user.presentation.status.change.title'|trans }}:
-                            {% if presentation.status == 0 or presentation.status == 2 %}
-                                <a class="btn btn-xs btn-warning" href="{{ path('route_admin_subject_user_presentation_set_status',
-                                {'id': subject.id, 'userId': student.id, 'status':1}) }}">
-                                    <i class="fa fa-fw fa-history"></i>
-                                    {{ 'admin.subject.user.presentation.status.change.presented'|trans }}
-                                </a>
-                            {% endif %}
-                            {% if presentation.status == 1 %}
-                                <a class="btn btn-xs btn-warning" href="{{ path('route_admin_subject_user_presentation_set_status',
-                                {'id': subject.id, 'userId': student.id, 'status':2}) }}">
-                                    <i class="fa fa-fw fa-history"></i>
-                                    {{ 'admin.subject.user.presentation.status.change.valuated'|trans }}
-                                </a>
-                            {% endif %}
                         </p>
                         <br>
 
@@ -97,7 +60,7 @@
                                     <div class="panel panel-default" style="background-color: {{ color }}">
                                         <div class="panel-heading">
                                             <strong>{{ comment.user.firstName }} {{ comment.user.lastName }}</strong> <span class="text-muted">{{ 'comments.commented'|trans }} {{ comment.date|date("d.m.Y H:i:s") }}</span>
-                                            <a href="{{ path('route_user_presentation_forum_delete', {'id': subject.id, 'userId': student.getId(), 'presentationId': presentation.getId(), 'commentId': comment.getId()}) }}"
+                                            <a href="{{ path('route_teacher_presentation_forum_delete', {'id': subject.id, 'presentationId': presentation.id, 'commentId': comment.id}) }}"
                                                class="btn btn-xs btn-danger" style="float:right; margin-right:10px;padding-top:4px">
                                                 <i class="glyphicon glyphicon-remove" style="font-size: 1.25em"></i>
                                             </a>

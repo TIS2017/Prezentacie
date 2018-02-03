@@ -1,0 +1,103 @@
+{% extends "RobiskApplicationBundle::Common/layout.html.twig" %}
+
+{% block robisk_application_content %}
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if is_granted('ROLE_USER') %}
+
+                        <h1 class="page-header">{{ presentation.getTitle() }}</h1>
+
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="{{ path('route_subjects')  }}">
+                                    <i class="fa fa-fw fa-book"></i>
+                                    {{ 'admin.side-navig.subjects'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('route_subject_view',
+                                    {'id': subject.id}) }}">
+                                    <i class="fa fa-fw fa-pencil"></i>
+                                    {{ subject.name }}
+                                </a>
+                            </li>
+
+                            <li class="active">
+                                <i class="fa fa-fw fa-envelope"></i>
+                                {{ presentation.getTitle() }}
+                            </li>
+                        </ol>
+
+                        <p style="margin:20px">
+                            {{ 'admin.subjects.user.presentation.download'|trans }}:
+                            <br><br>
+                            <a class="btn btn-xs btn-success" href="{{ path('route_subject_presentation_download',
+                                {'id': subject.id,
+                                    'presentationId': presentation.id}) }}">
+                                <i class="fa fa-fw fa-download"></i>
+                                {{ presentation.title }}
+                            </a>
+                        </p>
+
+                        <br>
+
+                        {% if presentation.getComments()|length > 0 %}
+                            {% for comment in presentation.getComments() %}
+
+                                {% if comment.user.getId() == user.getId() %}
+                                    {% set color = '#e6f7ff' %}
+                                {% else %}
+                                    {% set color = '#ffffff' %}
+                                {% endif %}
+                                <div class="col-sm-5" style="width:50%; clear:both">
+                                    <div class="panel panel-default" style="background-color: {{ color }}">
+                                        <div class="panel-heading">
+                                            <strong>{{ comment.user.firstName }} {{ comment.user.lastName }}</strong> <span class="text-muted">{{ 'comments.commented'|trans }} {{ comment.date|date("d.m.Y H:i:s") }}</span>
+                                            {% if comment.user.getId() == user.getId() %}
+                                                <a href="{{ path('route_subject_user_presentations_forum_delete',
+                                                    {'id': subject.id, 'presentationId': presentation.getId(), 'commentId': comment.getId()}) }}"
+                                                   class="btn btn-xs btn-danger" style="float:right; margin-right:10px;padding-top:4px">
+                                                    <i class="glyphicon glyphicon-remove" style="font-size: 1.25em"></i>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="panel-body">
+                                            {{ comment.content }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>{{ 'comments.empty'|trans }}</p>
+                            <br>
+                        {% endif %}
+
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url }}">
+                            <div class="form-group">
+                                <div>
+                                    {{ form_errors(form.content) }}
+                                </div>
+                                <div class="col-md-7">
+                                    {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': '4', 'style': 'width:85%;overflow-x: hidden;margin-left: 5px'}}) }}
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-left: 5px">
+                                <button class="col-md-2 btn btn-info" type="submit">
+                                    <i class="fa fa-fw fa-plus-circle"></i>
+                                    {{ 'comments.add'|trans }}</button>
+                            </div>
+                        </form>
+
+                    {% else %}
+                        <div class="title">{{ 'permission.warning.title'|trans }}</div>
+                        <p class="empty">{{ 'permission.denied.admin'|trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock robisk_application_content %}

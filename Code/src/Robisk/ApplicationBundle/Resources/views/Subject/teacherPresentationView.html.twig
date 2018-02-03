@@ -48,7 +48,7 @@
                                                     {{ 'admin.subjects.teacherPrezentation.download'|trans }}
                                                 </a>
                                             </td>
-                                            <td><a class="btn btn-xs btn-success" href="">
+                                            <td><a class="btn btn-xs btn-success" href="{{ path('route_subject_teacher_presentations_forum', {'id': subject.id, 'presentationId': presentation.getId()}) }}">
                                                     <i class="fa fa-fw fa-group"></i>
                                                     {{ 'admin.subjects.announcements.forum'|trans }}
                                                 </a>

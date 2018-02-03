@@ -5,7 +5,7 @@ namespace Robisk\ApplicationBundle\Doctrine\Manager;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class UserPresentationCommentsManager extends CommonManager
+class TeacherPresentationCommentManager extends CommonManager
 {
     /**
      * Constructor.

@@ -149,6 +149,15 @@
                                     <div class="col-md-2">
                                         {{ form_widget(form.valAttendance, {'attr': {'class': 'form-control'}}) }}
                                     </div>
+                                    <div>
+                                        {{ form_errors(form.valComment) }}
+                                    </div>
+                                    <div class="col-md-4 control-label" style="margin-top: 10px;">
+                                        {{ form_label(form.valComment, 'Bonusové úlohy') }}
+                                    </div>
+                                    <div class="col-md-2" style="margin-top: 10px;">
+                                        {{ form_widget(form.valComment, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -246,7 +255,7 @@
                                             <td>
                                                 {% if student.getPresentation(subject.id) != null %}
                                                     <a class="btn btn-xs btn-success" href="{{ path('route_admin_subject_user_presentation',
-                                                    {'id': subject.id, 'userId': student.id}) }}">
+                                                    {'id': subject.id, 'userId': student.id, 'presentationId': student.getPresentation(subject.id).getId()}) }}">
                                                         <i class="fa fa-fw fa-film"></i>
                                                         {{ 'subject.user.presentation'|trans }}
                                                     </a>
