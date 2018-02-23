@@ -47,7 +47,7 @@ user.login.title: Prihlásenie do systému
 user.login.username: Prihlasovacie meno
 user.login.password: Heslo
 user.login.reset: Zabudnuté heslo?
-user.login.submit: Prihásiť
+user.login.submit: Prihlásiť
 user.login.newPassword: Nové heslo
 user.login.passwordAgain: Zopakujte nové heslo
 

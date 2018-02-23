@@ -71,8 +71,8 @@
                     <div class="col-sm-5" style="width:50%; clear:both">
                         <div class="panel panel-default" style="background-color: {{ color }}">
                             <div class="panel-heading">
-                                <strong>{{ comment.user.firstName }} {{ comment.user.lastName }}</strong> <span class="text-muted">{{ 'comments.commented'|trans }} {{ comment.date|date("d.m.Y H:i:s") }}</span>
                                 {% if comment.user.getId() == user.getId() %}
+                                    <strong>{{ comment.user.firstName }} {{ comment.user.lastName }}</strong> <span class="text-muted">{{ 'comments.commented'|trans }} {{ comment.date|date("d.m.Y H:i:s") }}</span>
                                     <a href="{{ path('route_subject_announcements_forum_delete', {'id': id, 'announcementId': announcement.id, 'commentId': comment.id}) }}"
                                        class="btn btn-xs btn-danger" style="float:right; margin-right:10px;padding-top:4px">
                                         <i class="glyphicon glyphicon-remove" style="font-size: 1.25em"></i>
@@ -84,6 +84,8 @@
                                         <i class="glyphicon glyphicon-unchecked" style="font-size: 1.25em"></i>
                                     {% endif %}
                                 </a>
+                              {% else %}
+                                <strong>"Spoluziak"</strong> <span class="text-muted">{{ 'comments.commented'|trans }} {{ comment.date|date("d.m.Y H:i:s") }}</span>
                                 {% endif %}
                             </div>
                             <div class="panel-body">
