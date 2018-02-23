@@ -257,8 +257,11 @@ class Announcement
     public function setVideoURL($videoURL)
     {
         $result = $videoURL;
-        if (!strpos("youtube.com", $result)) {
+        if (strpos("$result", "youtube.com")!==false) {
             $result = str_replace("watch?v=", "embed/", $result);
+        }
+        elseif (strpos($result, "ted.com")!==false) {
+            $result = str_replace("www.ted.com", "embed.ted.com", $result);
         }
 
         $this->videoURL = $result;
