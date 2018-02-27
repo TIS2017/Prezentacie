@@ -16,6 +16,7 @@ use Robisk\ApplicationBundle\Entity\Attendance;
 use Robisk\ApplicationBundle\Entity\Subject;
 use Robisk\ApplicationBundle\Form\Type\SendMailType;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class TeacherPresentationAdminController extends BaseController {
 
@@ -77,8 +78,8 @@ class TeacherPresentationAdminController extends BaseController {
         $presentation = $teacherPresentationManager->findOneBy(array('id' => $id));
 
         $path = $presentation->getAbsolutePath();
-        $content = file_get_contents($path);
         $response = new BinaryFileResponse($path);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $presentation->getTitle());
 
         return $response;
     }
