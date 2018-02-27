@@ -15,6 +15,7 @@ use Robisk\ApplicationBundle\Entity\UserSubjectLookup;
 use Robisk\ApplicationBundle\Entity\Attendance;
 use Robisk\ApplicationBundle\Entity\Subject;
 use Robisk\ApplicationBundle\Form\Type\SendMailType;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class TeacherPresentationAdminController extends BaseController {
 
@@ -77,12 +78,8 @@ class TeacherPresentationAdminController extends BaseController {
 
         $path = $presentation->getAbsolutePath();
         $content = file_get_contents($path);
+        $response = new BinaryFileResponse($path);
 
-        $response = new Response();
-        $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment;filename="'.$presentation->getPath());
-
-        $response->setContent($content);
         return $response;
     }
 
