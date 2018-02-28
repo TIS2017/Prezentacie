@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Robisk\ApplicationBundle\Form\Type\PresentationType;
 use Robisk\ApplicationBundle\Form\Type\CommentType;
 use Robisk\ApplicationBundle\Form\Type\PresentationValuatingType;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class SubjectController extends BaseController
 {
@@ -139,13 +141,9 @@ class SubjectController extends BaseController
         $presentation = $presentationManager->findOneBy(array('id' => $presentationId));
 
         $path = $presentation->getAbsolutePath();
-        $content = file_get_contents($path);
+        $response = new BinaryFileResponse($path);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, iconv("UTF-8", "ASCII", $presentation->getTitle()));
 
-        $response = new Response();
-        $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment;filename="'.$presentation->getPath());
-
-        $response->setContent($content);
         return $response;
     }
 

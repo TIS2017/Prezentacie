@@ -531,7 +531,7 @@ class SubjectAdminController extends BaseController {
 											$message = \Swift_Message::newInstance($predmet)
 											   ->setFrom(array('kognitivnevedy@gmail.com' => $predmet))
 											   ->setTo(array($to => $to))
-											   ->setBody($sprava . "<br><br><strong>Prosím neodpisujte na tento email.</strong><br><br>", 'text/html');
+											   ->setBody($sprava, 'text/html');
 											$result = $mailer->send($message);
 									}
 								}
