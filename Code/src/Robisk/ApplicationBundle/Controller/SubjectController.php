@@ -142,7 +142,7 @@ class SubjectController extends BaseController
 
         $path = $presentation->getAbsolutePath();
         $response = new BinaryFileResponse($path);
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, iconv("UTF-8", "ASCII", $presentation->getTitle()));
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT);
 
         return $response;
     }
