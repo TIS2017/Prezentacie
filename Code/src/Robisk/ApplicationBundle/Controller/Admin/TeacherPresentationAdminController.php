@@ -73,15 +73,15 @@ class TeacherPresentationAdminController extends BaseController {
     }
 
     public function downloadAction($id){
-        $teacherPresentationManager = $this->get('manager_teacher_presentation');
-
-        $presentation = $teacherPresentationManager->findOneBy(array('id' => $id));
-
-        $path = $presentation->getAbsolutePath();
-        $response = new BinaryFileResponse($path);
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT);
-
-        return $response;
+      $teacherPresentationManager = $this->get('manager_teacher_presentation');
+      $presentation = $teacherPresentationManager->findOneBy(array('id' => $id));
+      $path = $presentation->getAbsolutePath();
+      $content = file_get_contents($path);
+      $response = new Response();
+      $response->headers->set('Content-Type', 'text/csv');
+      $response->headers->set('Content-Disposition', 'attachment;filename="'.$presentation->getPath());
+      $response->setContent($content);
+      return $response;
     }
 
     public function deleteAction($id){
